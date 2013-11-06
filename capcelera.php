@@ -1,5 +1,9 @@
 <?php
 
+if(!($_SESSION)) {
+    session_start();
+}
+
 function nouIncludePath ( $path ){
 	$pathFiles = dirname(__FILE__);
 	if (substr(PHP_OS, 0, 3) == 'WIN') {
