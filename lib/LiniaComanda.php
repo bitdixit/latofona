@@ -74,7 +74,12 @@ Class LiniaComanda {
 		global $db;
 		$db->SetFetchMode(ADODB_FETCH_ASSOC);
 		$sql = "select prodid, provnom, prodnom, ifnull(lcpreuunitat, '-') as lcpreuunitat,  ifnull(sum(lcquantitat),0) as lcquantitattotal, provresponsable, provid from Producte left join LiniaComanda on (lcdata='$data'  and prodid=lcprod) inner join Proveidor on (provid=prodprov) where  prodisstock<=0 group by prodid order by prodprov,prodnom";
-		return $db -> GetAll($sql);
+                $rows = $db -> GetAll($sql);
+                $return = array();
+                foreach ($rows as $row)
+                   if ($row['lcquantitattotal']>0) 
+			array_push($return,$row); 
+		return $return;
 	}
 	
 	function moureProducteComanda($prodid, $dataorig, $datadesti) {
