@@ -1,0 +1,58 @@
+body, td, input {
+  font-family: georgia,sans-serif,verdana,arial,helvetica;
+  font-size: 12px;
+}
+
+.cela_nom {
+  width: 400px;
+  padding: 5px 1px;
+  border-width: 0px 0px 0px 0px;
+  border-style: solid;
+  color: #222222;
+  background-color: #EEEEEE;
+  text-align: left;
+}
+
+.cela_preu {
+  width: 50px;
+  padding: 5px 1px;
+  border-width: 0px 0px 0px 0px;
+  border-style: solid;
+  color: #222222;
+  background-color: #EEEEEE;
+  text-align: right;
+}
+
+.cela_preu_input {
+  width: 50px;
+  padding: 5px 1px;
+  border-width: 1px 1px 1px 1px;
+  border-style: solid;
+  border-color: #BBBBBB;
+  color: #222222;
+  background-color: #FFFFFF;
+  text-align: right;
+}
+.cela_titol {
+  padding: 5px 1px;
+  border-width: 0px 0px 1px 0px;
+  border-style: solid;
+  color: #ffffff;
+  background-color: #999999;
+  text-align: left;
+}
+.menu {
+  color: #114499;
+  background-color: #ffffff;
+  text-decoration: none;
+}
+.menu_opcio {
+  color: #114499;
+  background-color: #ffffff;
+  text-decoration: none;
+}
+.menu_opcio:hover {
+  color: #1144ff;
+  background-color: #EEEEEE;
+  text-decoration: none;
+}

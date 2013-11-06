@@ -1,0 +1,4 @@
+/* Preu amb IVA del producte, marquem perquè es vegi que no es pot editar */
+#prodpreu{
+	border: none;
+}
