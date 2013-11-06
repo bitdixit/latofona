@@ -34,7 +34,7 @@
 			$smartyObj -> assign("multidata","true");
 		}		
 		elseif($informe == "ingresos") {
-			$rows = Ingres::getList("1=1 order by indata asc, inuf asc");
+			$rows = Ingres::getList("1=1 order by indata desc, inuf asc LIMIT 200");
 			$smartyObj -> assign("multidata","true");
 		}
 		elseif($informe == "ingresostotalsperdia") {

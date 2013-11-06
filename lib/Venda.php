@@ -83,7 +83,7 @@ class Venda {
 		
 		if($cond != "") $cond = "where ".$cond;
 		
-		$sql = "select sum(vensubtotal+venafegit) as ventotal,vendata from Venda $cond group by vendata order by vendata";
+		$sql = "select sum(vensubtotal+venafegit) as ventotal,vendata from Venda $cond group by vendata order by vendata DESC LIMIT 100";
 		$db -> SetFetchMode(ADODB_FETCH_ASSOC);
 		return $db -> GetAll($sql);	
 	}

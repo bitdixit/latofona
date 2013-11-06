@@ -27,7 +27,7 @@ Class Informe {
 	function totalIngresos($cond="") {
 		global $db;
 		if($cond != "") $cond = " where ".$cond;
-		$sql = "select indata as Data, sum(inquantitat) as 'Quantitat Total' from Ingres $cond group by indata";
+		$sql = "select indata as Data, sum(inquantitat) as 'Quantitat Total' from Ingres $cond group by indata ORDER BY indata DESC LIMIT 100";
 		return $db -> GetAll($sql);
 	}
 
