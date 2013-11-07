@@ -7,6 +7,7 @@
 <link href="css/taula.css" rel="stylesheet" type="text/css" />
 <body>
 {include file="menu.tpl"}
+<h1>Proveïdors</h1>
 <br>
 {$message}
 <br>

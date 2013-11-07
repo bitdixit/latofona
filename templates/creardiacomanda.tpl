@@ -16,7 +16,7 @@ Omple els valors del formulari i envia'l.<br><br>
 		any: <input type="text" name="year" size="4" value="{$year}"> 
 		mes: <input type="text" name="month" size="2" value="{$month}"> 
 		dia: <input type="text" name="day" value="{$day}" size="2"> <br><br>
-		<input type="submit" value="envia!"/>
+		<input type="submit" value="Crear nova data de comanda"/>
 	</form>
 </body>
 </html>

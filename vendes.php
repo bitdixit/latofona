@@ -3,11 +3,13 @@
 	include_once("Data.php");
 	include_once("UnitatFamiliar.php");
 	include_once("LiniaComanda.php");
+	include_once("ProducteHistoric.php");
 	include_once("Venda.php");
 	
 	$smartyObj = new Smarty;
 	$smartyObj -> assign("membre",$_SESSION["membre"]);
-	
+	$smartyObj -> assign("uflog",$_SESSION["membre"]["memuf"]);
+
 	$data = get_current_date();
 //	echo "*************************".$data;
 	
@@ -34,9 +36,9 @@
 			$_SESSION["total"] = 0;
 			$_SESSION["subtotal"] = 0;
 			$_SESSION["productes"] = array();
+                        ProducteHistoric::actualitzaProducteHistoric();
 		}
-		else 
-			echo "No s'ha pogut cobrar la venda!";
+		else echo "No s'ha pogut cobrar la venda!";
 	}
 	else if($_REQUEST["accio"] == "venda") { // confirmacio de venda.
 		$insertarlos = array();

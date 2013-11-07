@@ -7,6 +7,7 @@
 </head>
 <body>
 {include file="menu.tpl"}
+<h1>Gestiò membres</h1>
 <br>
 	<a href="?action=edit">edita l'usuari actual.</a><br>
 	{if $membre.memtipus == 1}

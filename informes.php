@@ -27,25 +27,33 @@
 		
 		$informe = $_REQUEST["informe"];
 		if($informe == "vendespendents") {
+			$smartyObj -> assign("title1","Vendes pendents $data");
 			$rows = Venda::getPending($data);
 		}
 		elseif($informe == "vendestotals") {
+			$smartyObj -> assign("title1","Històric de vendes de la cope");
+			$smartyObj -> assign("title2","");
 			$rows = Venda::getTotals();
 			$smartyObj -> assign("multidata","true");
 		}		
 		elseif($informe == "ingresos") {
+			$smartyObj -> assign("title1","Ultims ingressos");
 			$rows = Ingres::getList("1=1 order by indata desc, inuf asc LIMIT 200");
 			$smartyObj -> assign("multidata","true");
 		}
 		elseif($informe == "ingresostotalsperdia") {
+			$smartyObj -> assign("title1","Ingresos totals per dia");
+			$smartyObj -> assign("title2","");
 			$rows = Informe::totalIngresos();
 			$smartyObj -> assign("multidata","true");
 		}
 		elseif($informe == "vendesdia") {
+			$smartyObj -> assign("title1","Vendes del dia $data");
 			$rows = Venda::getListByDia($_REQUEST["data"]);
 			$smartyObj -> assign("multidata","true");
 		}
 		elseif($informe == "vendesdiadetall") {
+			$smartyObj -> assign("title1","Detall venda del dia $data");
 			$products = LiniaComanda::llistatProductesVenda($_REQUEST["venid"]);
 			//var_dump($products);
 			$venda = Venda::getById($_REQUEST["venid"]);

@@ -31,6 +31,7 @@ function commaReplace(orig) {
 	<link href="css/taula.css" rel="stylesheet" type="text/css" />
 	<body>
 	{include file="menu.tpl"}
+<h1>Alta/Modificació d'un producte</h1>
 	<br/>
 		<font color="red">{$message}</font><br><br>
 		<table>		

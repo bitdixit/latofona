@@ -28,13 +28,17 @@ function calculateTotalPrice() {
 <body>
 {include file="menu.tpl"}
 
-<font color="red">{$message}</font>  
 <br/>
 <!--{if $stockedit !='true'} -->
-	<a href="?action=editall&stockedit=true" ><font color="red"><b>Afegir estoc..</b></font></a> (Actualitza els preus <b>ABANS</b> d'afegir estoc)
+	<h1>Gestiò de productes</h1>
+    <br>
+    <input type="button" onclick="location.href='producte.php?action=editall&stockedit=true'" value="Afegir stocks (Actualitza els preus abans)">
+	<br>
 <!--{else} -->
+	<h1>Afegir stock</h1>
 	Actualitza els preus <b>ABANS</b> d'afegir estoc.
 <!--{/if}-->
+<font color="red">{$message}</font>  
 <br><br>
 <form method="POST">
   <table border="0" cellspacing="3" cellpadding="3">
@@ -49,9 +53,10 @@ function calculateTotalPrice() {
 		<td class='cela_titol'>En estoc</td>
 		<!--{if $stockedit=='true'} -->
 		<td class='cela_titol'>Estoc a afegir</td>
-		<!--{/if}-->
+		<!--{else}-->
 		<td class='cela_titol' width="20">editar</td>
 		<td class='cela_titol' width="20">eliminar</td>
+		<!--{/if}-->
 		<td></td>
 
     </tr>
@@ -105,9 +110,12 @@ function calculateTotalPrice() {
 		<!--{/if}-->
 		<td class='cela_preu'>{$producte.prodpreu}</td>
 		<td class='cela_preu'>{$producte.prodstockactual}</td>
-		<!--{if $stockedit=='true'} --><td align="center" width="70"><input type="text" name="prod[{$producte.prodid}]" size="5"/><!--{/if}--></td>
+		<!--{if $stockedit=='true'} -->
+		<td align="center" width="70"><input type="text" name="prod[{$producte.prodid}]" size="5"/>
+		<!--{else}-->
 		<td><a href="producte.php?action=edit&prodid={$producte.prodid}">editar</a></td>
 		<td><a href="producte.php?action=delete&prodid={$producte.prodid}">eliminar</a></td>
+		<!--{/if}--></td>
     </tr>
   </table>
 

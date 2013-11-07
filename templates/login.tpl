@@ -12,7 +12,10 @@
 </script>
 {/literal}
 <body>
-
+<center>
+<img src="img/titol.png" alt="La Tòfona" onclick="entra()" /><br>
+<img src="img/tofonaPetita.png"" />
+ <br>
 <form method="post" name="visible" id="visible">
   <table border="0" cellspacing="0" cellpadding="0">
     <tbody>
@@ -26,14 +29,10 @@
     </tr>
     </tbody>
   </table><br/>
+ <br>
   <input type="hidden" name="accio" value="send"/>
   <input type="submit" value="Validar"/>
 </form>
- <br>
- <center>
- <table border=1><tr><td align=center>
- <br><b>&nbsp;A partir d'ara podeu cercar a quin proveïdor correspon un producte a la nova opció de menú principal [Cerca per producte]</b>&nbsp;<br><br>
- </td></tr></table>
  </center>
 </body>
 </html>

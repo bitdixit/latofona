@@ -7,8 +7,8 @@
 <link href="css/taula.css" rel="stylesheet" type="text/css" />
 <body>
 {include file="menu.tpl"}
-<br>
-Edita un proveidor...<br><br>
+<h1>Alta/Modificaciò proveidor...</h1>
+<br><br>
 
 <form method="POST">
 	<input type="hidden" name="action" value="{$action}"/>

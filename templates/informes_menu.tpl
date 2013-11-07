@@ -8,20 +8,14 @@
 
 <body>
 {include file="menu.tpl"}
-
-<br/><a href="comanda_proveidors.php">Comandes (totals) a proveïdors</a>
-<br/><a href="?informe=vendespendents">Vendes Pendents</a>
-<br/><a href="?informe=ingresostotalsperdia">Ingresos Totals Per Dia</a>
-<br/><a href="?informe=ingresos">Ingresos a la caixa (especifics, per tots els dies)</a>
-<br/><a href="?informe=vendestotals">Vendes Totals Per tots els Dies</a>
-
+<h1>{$title1}</h1>
+<h4>{$title2}</h4>
 <!-- {if isset($informe)} -->
 <!--{if $multidata != 'true' && $informe != 'vendesdiadetall'} -->
-<br><br>Dia: {$dia}
-<br><br><!-- {if $datalast != ''} --><a href="?informe={$informe}&data={$datalast}" class="menu_opcio">Anterior Data</a>&nbsp; <!--{/if} -->|
- &nbsp;<!-- {if $datanext != ''} --><a href="?informe={$informe}&data={$datanext}" class="menu_opcio">Següent Data</a>&nbsp; | <!--{/if} --><br><br>
+<!-- {if $datalast != ''} --><input type="button" onclick="location.href='?informe={$informe}&data={$datalast}'" value="< Anterior data"><!--{/if} -->
+ &nbsp;<!-- {if $datanext != ''} --><input type="button" onclick="location.href='?informe={$informe}&data={$datanext}'" value="Seguent data >"> <!--{/if} --><br><br>
 <!--{/if} -->
-<br><br>
+<br>
 <!-- {if isset($rows) } -->
 <table border="1px">
 	<tr>

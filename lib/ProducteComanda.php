@@ -41,5 +41,7 @@ Class ProducteComanda {
 			}
 		/* Acabar-la aquí... Commit o Rollback */
 	}
+
+
 }
 ?>

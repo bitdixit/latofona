@@ -10,12 +10,14 @@
 {include file="menu.tpl"}
 
 <!--{if $dia == ''}-->
+<h1>Comanda proveidors</h1> 
 Ja no n'hi ha dies de comandes....<br/>	
 <a href="comanda_proveidors.php" class="menu_opcio">Tornar a comandes a proveidors</a>
 <!--{else}-->
-Comanda per recollir el dia <b>{$dia}</b><br/>
-&nbsp;<a href="comanda_proveidors.php?data={$dia}&data_direccio=1" class="menu_opcio">Selecciona comanda anterior</a>&nbsp;|
-&nbsp;<a href="comanda_proveidors.php?data={$dia}&data_direccio=2" class="menu_opcio">Selecciona comanda següent</a>&nbsp;<br/>
+<h1>Comanda proveidors {$dia}</h1> 
+<input type="button" onclick="location.href='comanda_proveidors.php?data={$dia}&data_direccio=1'" value='< Comanda anterior'>
+<input type="button" onclick="location.href='comanda_proveidors.php?data={$dia}&data_direccio=2'" value='Comanda següent >'>
+<br>
 
 <!--{if count($productes) > 0 }-->
 <br/>
@@ -44,6 +46,7 @@ Comanda per recollir el dia <b>{$dia}</b><br/>
   </table><br/>
 
 <!--{else}-->
+<br>
 Per el dia {$dia}, encar&agrave; no hi ha productes demanats.
 <!--{/if}-->
 

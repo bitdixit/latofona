@@ -9,19 +9,27 @@
 <body>
 {include file="menu.tpl"}
 
+
+
 <!--{if $action != 'checkout'} -->
-	{include file="vendacomplete.tpl"}
+    <h1>Confirmada venda dia {$dia}<br>Unitat Familiar {$uf}</h1>
+	Unitat Familiar {$UF.ufid} - <b>{$UF.ufname}</b> ha gastat {$total}&euro;<br>
+	Li queda: <font color="red"><b>{$UF.ufval}</b></font><br><br><br>
+	
+	<a href="vendes.php">altre venda?</a><br><br>
 <!--{else} --> 
-<a href="vendes.php?uf={$uf}&data={$dia}"> <-- torna enrera per modificar productes o quantitats.</a> <br><br>
+	<!--{if $uf != $membre.memuf}-->
+	    <h1>Confirmar venda dia {$dia}<br>Unitat Familiar {$uf}<br>i afegir credit</h1>
+	<!--{else} -->
+	    <h1>Actualitzada venda dia {$dia}<br>Unitat Familiar {$uf}</h1>
+    <!--{/if} -->
+	<input type="button" value="< Torna enrera per modificar productes o quantitats" onclick='location.href="vendes.php?uf={$uf}&data={$dia}"'><br><br>
 <!-- {/if} -->
 
 <!--{if count($productes) > 0 }-->
-Comanda/Compra del dia {$dia} - Unitat Familiar {$uf}<br/><br/>
-
 
 <!--{if $goodip == 'true'} -->
 	<form method="post" name="visible" id="visible">
-	<input type="submit" value="Siiiiiiiii (acabar compra)->"/><br><br>
 <!-- {/if} -->  
   <table border="0" cellspacing="0" cellpadding="0">
     <tr>

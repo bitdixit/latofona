@@ -7,7 +7,7 @@
 </head>
 
 <body>
-<a href="informes.php"> <-- tornar a informes </a><br><br>
+<input type="button" value="< Enrere" onclick="history.back()"<br><br>
 
 Proveidor: <b>{$proveidor.provnom}</b><br>
 Tel: <b>{$proveidor.provtelefon}</b><br>

@@ -78,12 +78,16 @@ function posarEnBlanc(obj){
 <body>
 {include file="menu.tpl"}
 <br>
-Comanda <b>pel dia {$dia}</b> - Unitat Familiar {$uf}<br/>
 <!--{if $action != 'venda' }-->  
-&nbsp; | <!--{if $datalast != ''} --> <a href="llista_productes_uf.php?data={$datalast}" class="menu_opcio">Comanda Anterior</a>&nbsp;| <!--{/if} -->
- &nbsp;<!--{if $datanext != ''} --> <a href="llista_productes_uf.php?data={$datanext}" class="menu_opcio">Comanda Següent</a>&nbsp; | <!--{/if} --> <br><br>
+<h1>Comanda <b>pel dia {$dia}<br>Unitat Familiar {$uf}</h1><br/>
+<!--{if $datalast != ''} --> <input type="button" value="< Comanda anterior" onclick="location.href='llista_productes_uf.php?data={$datalast}'" >  <!--{/if} -->
+<!--{if $datanext != ''} --> <input type="button" value="Comanda següent >" onclick="location.href='llista_productes_uf.php?data={$datanext}'" ><!--{/if} --> 
+<br>
+<!--{else}-->
+<h1>Venda <b>pel dia {$dia}<br>Unitat Familiar {$uf}</h1>
+
+
 <!--{/if}-->
-<br/>
 
 <!--{if $comanda_ok }-->
 <font color="red"> 
@@ -93,18 +97,13 @@ Comanda <b>pel dia {$dia}</b> - Unitat Familiar {$uf}<br/>
 
 <!--{if count($productes) > 0 }-->
 
-codi: <input type="text" id="codi"/>  
-quantitat: <input type="text" id="quantitat"/> 
-&nbsp;&nbsp;<a href="#" onClick="javascript:posaQuantitat()"><b>-> Afegir</b></a><br/><br/>
 <form method="post" name="prodlist" id="visible">
 
 <!--{if $action != 'venda' }-->  
   <input type="hidden" name="accio" value="send"/>
   <input type="hidden" name="datDia" value="{$dia}"/>
-  <input type="submit" value="Validar"/>
 <!--{else}-->
   <input type="hidden" name="accio" value="venda"/>
-  <input type="submit" value="Confirmar Compra ->"/>
 <!--{/if}-->
 
   <table>

@@ -7,8 +7,9 @@
 <link href="css/taula.css" rel="stylesheet" type="text/css" />
 <body>
 {include file="menu.tpl"}
-<br>
-<br>
+<h1>Vendes</h1>
+<h4>No et pots vendre a tu mateix. ni a ningú de la teva unitat familiar.<br>
+Algú d'una altra unitat familiar t'ha de vendre.</h4>
 <form method="GET">
 	<select name="uf">
 <!--{foreach from=$ufs item=uf name=lauf}-->
@@ -31,9 +32,5 @@
 	<input type="submit" value="vendre a aquesta UF ---->"/>
 </form>
 <br><br>
-<table>
-<tr><td><b>NOTA:</b></td><td>No et pots vendre a tu mateix... ni a ningú de la teva unitat familiar.</td>
-<tr><td>&nbsp;</td><td>Algú d'una altra unitat familiar t'ha de vendre...</td>
-</table>
 
 </html>

@@ -7,8 +7,7 @@
 <link href="css/taula.css" rel="stylesheet" type="text/css" />
 <body>
 {include file="menu.tpl"}
-<br>
-Edita una unitat familiar...<br><br>
+<h1>Edita una unitat familiar</h1>
 
 <form method="POST">
 	<input type="hidden" name="action" value="{$action}"/>

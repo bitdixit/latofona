@@ -29,9 +29,10 @@ function allSelectProveidor(truefalse, proveidor) {
 {/literal}
 <body>
 {include  file="menu.tpl"}
-Productes que hi haur&agrave; el dia: {$dia}<br/>
- &nbsp;<a href="mostra_productes.php?data={$dia}&data_direccio=1" class="menu_opcio">Comanda anterior</a>&nbsp;|
- &nbsp;<a href="mostra_productes.php?data={$dia}&data_direccio=2" class="menu_opcio">Comanda següent</a>&nbsp;]<br/>
+<h1>Productes disponibles per a comanda<br>{$dia}</h1>
+<h4>Selecciona productes disponibles per a commanda.<br>El responsable de cada proveïdor és el responsable d'omplir aquesta graella.</h4>
+<input type=button value="< Comanda anterior" onclick="location.href='mostra_productes.php?data={$dia}&data_direccio=1'">
+<input type=button value="Comanda següent >" onclick="location.href='mostra_productes.php?data={$dia}&data_direccio=2'">
 <br/>
 <b>
 <!--{if $accio == 'send'}-->

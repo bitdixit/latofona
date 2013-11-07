@@ -8,6 +8,7 @@
 
 <body>
 {include file="menu.tpl"}
+<h1>Afegir/Modificar membre</h1>
 <br>
 		<font color="red">{$message}</font><br><br>
 		<table>		
