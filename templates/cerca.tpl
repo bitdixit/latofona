@@ -4,16 +4,25 @@
   <title>CERCA DE PRODUCTES</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <link href="css/taula.css" rel="stylesheet" type="text/css" />
+
+{literal}
+<script type="text/javascript">
+function FocusInput()
+{
+   document.getElementById("nomproducte").focus();
+}
+</script>
+{/literal}
 </head>
 
-<body>
+<body onload="FocusInput()">
 <h2>CERCA DE PRODUCTES (EN PROVES)</h2>
 <form method="post" name="visible" id="visible">
   <table border="0" cellspacing="0" cellpadding="0">
     <tbody>
     <tr>
 		<td class='cela_nom'>Nom producte:</td>
-		<td class='cela_nom'><input name="nomproducte" /></td>
+		<td class='cela_nom'><input id="nomproducte" name="nomproducte" /></td>
     </tr>
     <tr>
 		<td class='cela_nom'>Només disponibles:</td>
