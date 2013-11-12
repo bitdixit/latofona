@@ -5,7 +5,7 @@
 	include_once("LiniaComanda.php");
 	include_once("ProducteHistoric.php");
 	include_once("Venda.php");
-	
+ 
 	$smartyObj = new Smarty;
 	$smartyObj -> assign("membre",$_SESSION["membre"]);
 	$smartyObj -> assign("uflog",$_SESSION["membre"]["memuf"]);
@@ -80,7 +80,6 @@
 	}
 	else if (isset($_REQUEST["uf"]) && isset($_REQUEST["data"])) { // venda a aquesta familia, aquesta data..
 		$_SESSION["ufvenda"] = $_REQUEST["uf"];
-		
 		$smartyObj -> assign("productes", LiniaComanda::llistatProductes($_REQUEST["uf"],$_REQUEST["data"], "(p.prodstockactual > 0 or p.prodisstock <= 0)"));
 		$smartyObj -> assign("dia",$data);
 		$smartyObj -> assign("proveidor",0);
@@ -95,7 +94,7 @@
 		//</dunetna>
 		$smartyObj -> assign("ufs", UnitatFamiliar::getAll());
 		$smartyObj -> assign("dates",Data::getAll("1=1 order by datdata desc"));
-		$smartyObj -> assign("datavenda",$_SESSION["datavenda"]);
+		$smartyObj -> assign("datavenda",Data::comandaActual());
 		$smartyObj -> display("vendes_options.tpl");
 	}
 ?>
