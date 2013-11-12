@@ -2,6 +2,7 @@
 
 include_once("funcions.php");
 include_once("Producte.php");
+include_once("lib/ProducteComanda.php");
 
 Class ProducteHistoric
 {
@@ -45,7 +46,7 @@ Class ProducteHistoric
    function actualitzaProducteHistoric()
    {
        global $db;
-       $data = Data::getBestDateForComanda() ;
+       $dataAquestaCommanda=Data::comandaActual() ;
        $strSQL = "SELECT COUNT(data) AS total FROM ProducteHistoric WHERE data='".$data."'";
        $rownum = $db->GetAll($strSQL) or die("Error en la sentencia SQL: $strSQL<br/>".$db->ErrorMsg());
        $num=$rownum[0]['total'];
@@ -65,6 +66,7 @@ Class ProducteHistoric
        global $db;
        $dataAquestaCommanda=Data::comandaActual() ;
        $dataAnteriorCommanda = Data::comandaAnterior( $dataAquestaCommanda );
+
        $nowAvailables = ProducteHistoric::llistatProductesDisponibles( $dataAquestaCommanda );
        $strSQL = "SELECT prodid,prodpreu FROM ProducteHistoric WHERE data='".$dataAnteriorCommanda."'";
        	
@@ -91,7 +93,7 @@ Class ProducteHistoric
             }
             if ($productExists === FALSE)
             {
-                $nowAvailable['change']='NOU PRODUCTE';
+                $nowAvailable['change']='DISPONIBLE';
                 array_push($changes,$nowAvailable);
             }
        }
