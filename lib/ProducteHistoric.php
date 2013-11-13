@@ -46,7 +46,7 @@ Class ProducteHistoric
    function actualitzaProducteHistoric()
    {
        global $db;
-       $dataAquestaCommanda=Data::comandaActual() ;
+       $data=Data::comandaActual() ;
        $strSQL = "SELECT COUNT(data) AS total FROM ProducteHistoric WHERE data='".$data."'";
        $rownum = $db->GetAll($strSQL) or die("Error en la sentencia SQL: $strSQL<br/>".$db->ErrorMsg());
        $num=$rownum[0]['total'];
