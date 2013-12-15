@@ -25,7 +25,7 @@
 	<td>{$change.prodnom}</td>
 	<td>{$change.provnom}</td>
 	<td>{$change.prodpreu}</td>
-	<td>{$change.change}</td>
+	<td>{$change.type} {$change.change}</td>
 </tr>
 <!--{/foreach}-->
 </table>

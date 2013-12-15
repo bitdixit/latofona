@@ -10,6 +10,7 @@ Class ProducteHistoric
    {
       $rows = Producte::llistatProductes();
       $dispComanda = ProducteComanda::llistatProductesMarcats($currDate);
+      
       $disponibles = array();
       foreach ( $rows as $row )
       {
@@ -20,20 +21,20 @@ Class ProducteHistoric
 
 	  if ($row["prodisstock"]==-1)
 	  {
-             $type="comanda";
+             $type="COMMANDA ";
 	  } else if ($row["prodisstock"]==1 && $row["prodstockactual"]>0)
 	  {
-	      $type="estoc";
+	      $type="ESTOC ";
 	  } else if ($row["prodisstock"]==0 && $row["prodstockactual"]>0)
 	  {	
-	      $type="estoc";
+	      $type="ESTOC ";
 	  } else if ($row["prodisstock"]==0)
 	  {
 	        foreach ($dispComanda as $dispComandaRow)
 	        {
-	           if ($dispComandaRow["prodid"]==$row["prodid"]) 
+		   if ($dispComandaRow["prodid"]==$row["prodid"]) 
 	           {
-	              if ($dispComandaRow["checked"]!="") $type="comanda";
+	              if ($dispComandaRow["checked"]!="") $type="COMMANDA ";
     		      break;
 	           }
 	        }
@@ -66,8 +67,8 @@ Class ProducteHistoric
        global $db;
        $dataAquestaCommanda=Data::comandaActual() ;
        $dataAnteriorCommanda = Data::comandaAnterior( $dataAquestaCommanda );
-
-       $nowAvailables = ProducteHistoric::llistatProductesDisponibles( $dataAquestaCommanda );
+     
+       $nowAvailables = ProducteHistoric::llistatProductesDisponibles( Data::comandaSeguent($dataAquestaCommanda) );
        $strSQL = "SELECT prodid,prodpreu FROM ProducteHistoric WHERE data='".$dataAnteriorCommanda."'";
        	
        $previousAvailables = $db->GetAll($strSQL);

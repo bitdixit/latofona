@@ -4,7 +4,6 @@
         include_once('Producte.php');
         include_once('ProducteComanda.php');
         include_once('ProducteHistoric.php');
-
         $changes = ProducteHistoric::generaDiferenciesProducteHistoric();
 	$smartyObj = new Smarty;
 	$smartyObj -> assign("changes", $changes);

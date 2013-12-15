@@ -11,7 +11,7 @@
 // 			echo "logged in";
 //			header("Location: http://" . $_SERVER['HTTP_HOST'] . "/llista_productes_uf.php");
 // [moni] Canvio el header per tal que no es redirigeixi a l'arrel del servidor
-			header("Location: llista_productes_uf.php");
+			header("Location: novetats.php");
 		}	
 		else {	
 			echo "Error en el password o la contrasenya!!";
