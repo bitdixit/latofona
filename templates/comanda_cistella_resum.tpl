@@ -44,10 +44,6 @@ function dividirX100(valor){
 	return val.toFixed(2); 
 }
 
-function toggleView(divname) {
-	thediv = document.getElementById(divname);
-	thediv.style.display = (thediv.style.display == '') ? "none" : "";
-}
 
 function commaReplace(orig) {
 	regX = /,/gi;
@@ -78,28 +74,17 @@ function posarEnBlanc(obj){
 <body>
 {include file="menu.tpl"}
 <br>
-<h1>Venda <b>pel dia {$dia}<br>Unitat Familiar {$uf}</h1>
-
-<!--{if count($productes) > 0 }-->
+<h1>Resum comanda <b>pel dia {$dia}<br>Unitat Familiar {$uf}</h1>
+<font color="green"> 
+<br/><b>Comanda desada correctament</b><br/>
+</font>
 
 <form method="post" name="prodlist" id="visible">
 
-<!--{if $action != 'venda' }-->  
   <input type="hidden" name="accio" value="send"/>
   <input type="hidden" name="datDia" value="{$dia}"/>
-<!--{else}-->
-  <input type="hidden" name="accio" value="venda"/>
-<!--{/if}-->
 
   <table>
-    <tr>
-		<td class="cela_titol" width="40"></td>
-		<td class="cela_nom">&nbsp;</td>
-		<td class="cela_preu" width="50">&nbsp;</td>
-		<td class='cela_titol' width="55">Subtotal</td>
-		<td><input name="subtotal" value="0" size="10" class='cela_preu' disabled/></td>
-		<td>&nbsp;</td>
-    </tr>
     <tr>
     		<td class='cela_titol'  width="40">Codi</td>
     		<td class='cela_titol' width="400">Producte</td>
@@ -120,11 +105,11 @@ function posarEnBlanc(obj){
 	<!--{/if}-->
   <table>    
     <tr>
-		<td colspan=4 class='proveidor'><b><a href="#{$producte[5]}" onClick="javascript:toggleView('{$producte[5]}')">{$producte[4]}</a></b></td>
+		<td colspan=4 class='proveidor'><b>{$producte[4]}</b></td>
 		<td></td>
     </tr>
   </table>    
-    <div id="{$producte[5]}" style="display:none"><a name="{$producte[5]}"></a>
+    <div id="{$producte[5]}"><a name="{$producte[5]}"></a>
 <!--{assign var="proveidor" value=$producte[5]}-->
 <!--{/if}-->
   <table>
@@ -132,10 +117,9 @@ function posarEnBlanc(obj){
 		<td class='cela_titol' width="40">{$producte[0]}</td>
 		<td class='cela_nom'>{$producte[1]}</td>
 		<td class='cela_preu'>{$producte[2]}</td>
-		<!-- <dunetna> canvi d'event i afegir un altre event
-		<td><input name="prod_{$producte[0]}" value="{$producte[3]}" size="10" class='cela_preu_input' onChange="javascript:recalcularAcumulat({$producte[0]})"/></td>-->
-		<td><input name="prod_{$producte[0]}" value="{$producte[3]}" size="10" class='cela_preu_input' onfocus="posarEnBlanc(this)" onkeyup="javascript:recalcularAcumulat({$producte[0]})"/></td>
-		<!-- </dunetna> -->
+
+		<td><input name="prod_{$producte[0]}" value="{$producte[3]}" size="10" class='cela_preu' disabled /></td>
+
 		<td><input name="acum_{$producte[0]}" size="10" class='cela_preu' disabled/></td>
 		<td><input type="hidden" name="preu_{$producte[0]}" value="{$producte[2]}" /></td>
 		<script>
@@ -155,13 +139,10 @@ function posarEnBlanc(obj){
 		<td>&nbsp;</td>
     </tr>
   </table><br/>
-  <input type="hidden" name="accio" value="venda"/>
-  <input type="submit" value="Confirmar Compra->"/>
 
 </form>
-<!--{else}-->
-Per el dia {$dia}, encar&agrave; no hi ha productes sel.leccionats. !! I no es poden fer commandes !!
-<!--{/if}-->
+<br>
+<input type="button" value="< Tornar a editar la comanda" onclick="location.href='comanda_cistella.php?data={$dia}'" >
 </body>
 <script>
 recalcularTot();

@@ -67,7 +67,7 @@ Has entrat com <b>{$membre.memnom}</b>
             onmouseover="mcancelclosetime()" 
             onmouseout="mclosetime()">
         <a href="vendes.php">Vendes</a>
-        <a href="llista_productes_uf.php">Fer comanda</a>
+        <a href="comanda_cistella.php">Fer comanda</a>
 	    <a href="cerca.php" onclick="window.open('cerca.php','_cerca','left='+(screen.width-520)+',top=20,width=500,height=600,toolbar=0,resizable=0,scrollbars=1'); return false;" >Cerca de productes</a>
 	    <a href="novetats.php">Novetats de la setmana</a>
         </div>

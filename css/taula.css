@@ -11,6 +11,10 @@ h1 {
    background-color: #FFF;
 }
 
+.proveidor {
+  font-size: 16px;
+}
+
 .cela_nom {
   width: 400px;
   padding: 5px 1px;

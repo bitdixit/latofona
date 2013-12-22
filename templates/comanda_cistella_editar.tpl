@@ -78,18 +78,17 @@ function posarEnBlanc(obj){
 <body>
 {include file="menu.tpl"}
 <br>
-<h1>Venda <b>pel dia {$dia}<br>Unitat Familiar {$uf}</h1>
+<h1>Editar comanda <b>pel dia {$dia}<br>Unitat Familiar {$uf}</h1><br/>
+<!--{if $datalast != ''} --> <input type="button" value="< Comanda anterior {$datalast}" onclick="location.href='comanda_cistella.php?data={$datalast}'" >  <!--{/if} -->
+<!--{if $datanext != ''} --> <input type="button" value="Comanda següent {$datanext} >" onclick="location.href='comanda_cistella.php?data={$datanext}'" ><!--{/if} --> 
+<br>
 
 <!--{if count($productes) > 0 }-->
 
 <form method="post" name="prodlist" id="visible">
 
-<!--{if $action != 'venda' }-->  
   <input type="hidden" name="accio" value="send"/>
   <input type="hidden" name="datDia" value="{$dia}"/>
-<!--{else}-->
-  <input type="hidden" name="accio" value="venda"/>
-<!--{/if}-->
 
   <table>
     <tr>
@@ -155,8 +154,9 @@ function posarEnBlanc(obj){
 		<td>&nbsp;</td>
     </tr>
   </table><br/>
-  <input type="hidden" name="accio" value="venda"/>
-  <input type="submit" value="Confirmar Compra->"/>
+  <input type="hidden" name="accio" value="send"/>
+  <input type="hidden" name="datDia" value="{$dia}"/>
+  <input type="submit" value="Validar comanda >"/>
 
 </form>
 <!--{else}-->
