@@ -1,24 +1,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <title>Gestió de Productes</title>
+  <title>Gestió de Productes {$provnom}</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 {literal}
 <script>
 
-function toggleView(elmname) {
-	elm = document.getElementById(elmname);
-	elm.style.display = (elm.style.display == '') ? "none" : "";
-}
-
-function calculateTotalPrice() {
-	percent = document.getElementById('iva').value / 100;
-	//alert (percent);
-	//alert(document.forms[0].preuinicial.value);
-	var preufinal = 0;
-	preufinal = parseFloat(document.forms[0].preuinicial.value) + parseFloat(document.forms[0].preuinicial.value * percent);
-	document.getElementById('prodpreu').value = preufinal.toFixed(2);
+function confirmAndGo(msg,url)
+{
+	if(window.confirm(msg))
+		location.href = url;
 }
 
 </script>
@@ -30,16 +22,13 @@ function calculateTotalPrice() {
 
 <br/>
 <!--{if $stockedit !='true'} -->
-	<h1>Gestiò de productes</h1>
-    <br>
-    <input type="button" onclick="location.href='producte.php?action=editall&stockedit=true'" value="Afegir stocks (Actualitza els preus abans)">
-	<br>
+	<h1>Gestiò de productes {$provnom}</h1>
 <!--{else} -->
 	<h1>Afegir stock</h1>
 	Actualitza els preus <b>ABANS</b> d'afegir estoc.
 <!--{/if}-->
-<font color="red">{$message}</font>  
-<br><br>
+<font color="blue">{$message}</font>  
+<br>
 <form method="POST">
   <table border="0" cellspacing="3" cellpadding="3">
     <tr>
@@ -61,46 +50,7 @@ function calculateTotalPrice() {
 
     </tr>
    
-<!--{assign var="divset" value='false'}-->
 <!--{foreach from=$productes item=producte name=llistatproductes}-->
-
-
-<!--<dunetna> Controlem els proveidors sense productes -->
-<!--{if $producte.prodprov == ""}-->
-	<!--{if $divset == 'true'}-->
-		</div>
-	<!--{else}-->
-		<!--{assign var="divset" value='true'}-->
-	<!--{/if}-->
-   <table>
-    <tr>
-		<td>&nbsp;</td>
-		<td colspan=5><b>{$producte.provnom}</b>&nbsp;&nbsp; <a href="?action=add&provid={$producte.provid}">afegir</a></td>
-		<td>&nbsp;</td>
-    </tr>
-   </table>
-
-<!--{else}-->
-<!--</dunetna>-->
-
-<!--{if $proveidor != $producte.prodprov}-->
-	<!--{if $divset == 'true'}-->
-		</div>
-	<!--{else}-->
-		<!--{assign var="divset" value='true'}-->
-	<!--{/if}-->
-   <table>
-    <tr>
-		<td>&nbsp;</td>
-		<td colspan=5><b><a href="#{$producte.prodid}" onClick="javascript:toggleView('{$producte.prodid}')">{$producte.provnom}</a></b>&nbsp;&nbsp; <a href="?action=add&provid={$producte.provid}">afegir</a></td>
-		<td>&nbsp;</td>
-    </tr>
-   </table>
-   <a name="{$producte.prodid}"></a>
-    <div id="{$producte.prodid}" style="display:none">
-<!--{assign var="proveidor" value=$producte.prodprov}-->
-<!--{/if}-->
-  <table>
     <tr>
 		<td>&nbsp;</td>
 		<td class='cela_nom'>{$producte.prodnom}</td>
@@ -114,21 +64,25 @@ function calculateTotalPrice() {
 		<td align="center" width="70"><input type="text" name="prod[{$producte.prodid}]" size="5"/>
 		<!--{else}-->
 		<td><a href="producte.php?action=edit&prodid={$producte.prodid}">editar</a></td>
-		<td><a href="producte.php?action=delete&prodid={$producte.prodid}">eliminar</a></td>
+		<td><a href="#" onclick="javascript:confirmAndGo('Segur?','producte.php?action=delete&provid={$provid}&prodid={$producte.prodid}')">eliminar</a></td>
 		<!--{/if}--></td>
     </tr>
-  </table>
-
-<!--<dunetna> Tanquem if -->
-<!--{/if}-->
-<!--<dunetna> Tanquem if -->
 
 <!--{/foreach}-->
+  </table>
 	</div> <!-- closing the last div.. -->
 <!--{if $stockedit=='true'} -->
+<br>
 <input type="hidden" name="action" value="stockupdate">
-<br/><input type="submit" name="stockupdate" value="enviar stock a afegir...">
-</form>
+<input type="button" onclick="location.href='?provid={$provid}'" value="< Cancelar">
+<input type="submit" name="stockupdate" value="Actualitzar estock >">
+<!--{else}-->
+<br>
+<input type="button" onclick="location.href='proveidor.php'" value="< Enrere">
+<input type="button" onclick="location.href='producte.php?action=editall&stockedit=true&provid={$provid}'" value="Afegir stocks (Actualitza els preus abans)">
+<input type="button" onclick="location.href='?action=add&provid={$provid}'" value="Afegir nou producte">
 <!--{/if}-->
+</form>
+
 </body>
 </html>

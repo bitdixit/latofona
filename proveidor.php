@@ -18,7 +18,7 @@ else if (($_REQUEST["action"] == "modify")) {
 		$smartyObj -> assign("message", "no s'ha pogut afegir el proveidor...<br>");
 	else
 		$smartyObj -> assign("message", "s'ha modificat el proveidor $_REQUEST[provnom]...<br>");
-		$smartyObj -> assign("provs",Proveidor::getAll());
+		$smartyObj -> assign("provs",Proveidor::getAll("provnom <> ''"));
 		$smartyObj -> display("proveidorlist.tpl");
 }
 else if (($_REQUEST["action"] == "new")) {
@@ -28,11 +28,11 @@ else if (($_REQUEST["action"] == "new")) {
 else if (($_REQUEST["action"] == "add")) {
 	if (!Proveidor::add($_REQUEST))
 		$smartyObj -> assign("message", "no s'ha pogut afegir el proveidor...<br>");
-	$smartyObj -> assign("provs",Proveidor::getAll());
+	$smartyObj -> assign("provs",Proveidor::getAll("provnom <> ''"));
 	$smartyObj -> display("proveidorlist.tpl");
 }
 else { // show list of all provs..
-	$smartyObj -> assign("provs",Proveidor::getAll());
+	$smartyObj -> assign("provs",Proveidor::getAll("provnom <> ''"));
 	$smartyObj -> display("proveidorlist.tpl");
 }
 

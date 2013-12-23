@@ -64,6 +64,7 @@ Class Data {
 	}
 	
 	function createOrderDay($year, $month, $day) {
+		Seguretat::AssertAdministrator();
 		global $db;
 // 		$db -> debug = true;
 		$sql = "insert into Data (datdata, datestat) values ('$year-$month-$day', 1)";

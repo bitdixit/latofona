@@ -8,7 +8,13 @@
 	$smartyObj = new Smarty;
 	$smartyObj -> assign("membre", $_SESSION["membre"]);
 	$smartyObj -> assign("dia", get_current_date());
-				
+
+	$provid =  $_REQUEST["provid"];
+	$proveidor =  Proveidor::getById($_REQUEST["provid"]);
+	$smartyObj -> assign("provnom", $proveidor["provnom"] );
+	$smartyObj -> assign("provid", $provid );
+
+
 	if($_SESSION["membre"]["memtipus"] == 1) {
 		if($_REQUEST["action"] == "add"){
 			$smartyObj -> assign("action", "create");
@@ -24,7 +30,7 @@
 				else
 					$smartyObj -> assign("message","No s'ha pogut crear el producte...");
 				
-				$smartyObj -> assign("productes", Producte::llistatProductes());
+				$smartyObj -> assign("productes", Producte::llistatProductesProveidor($provid ));
 				$smartyObj -> display("producteseditar.tpl");
 				
 			}	
@@ -63,7 +69,7 @@
 				else
 					$smartyObj -> assign("message","No s'ha pogut modificar el producte...");
 				
-				$smartyObj -> assign("productes", Producte::llistatProductes());
+				$smartyObj -> assign("productes", Producte::llistatProductesProveidor($provid ));
 				$smartyObj -> display("producteseditar.tpl");
 			}
 			else { // modifying, but there are missing parameters.
@@ -112,7 +118,7 @@
 			else
 				$smartyObj -> assign("message", "Producte NO eliminat!<br>");
 			
-			$smartyObj -> assign("productes", Producte::llistatProductes());
+			$smartyObj -> assign("productes", Producte::llistatProductesProveidor($provid ));
 			$smartyObj -> display("producteseditar.tpl");
 		}
 		else if(($_REQUEST["action"] == "stockupdate") && is_array($_REQUEST["prod"])) {
@@ -126,11 +132,11 @@
 			if($message == "") $message = "S'ha agfegit estoc<br/>";
 			
 			$smartyObj -> assign("message", $message);
-			$smartyObj -> assign("productes", Producte::llistatProductes());
+			$smartyObj -> assign("productes", Producte::llistatProductesProveidor($provid ));
 			$smartyObj -> display("producteseditar.tpl");
 		}
 		else {		
-				$smartyObj -> assign("productes", Producte::llistatProductes());
+				$smartyObj -> assign("productes", Producte::llistatProductesProveidor($provid ));
 				if($_REQUEST["stockedit"] == 'true') 
 					$smartyObj -> assign("stockedit", "true");
 				$smartyObj -> display("producteseditar.tpl");

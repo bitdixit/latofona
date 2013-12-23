@@ -35,6 +35,15 @@ h1 {
   text-align: right;
 }
 
+.cela_generica {
+  padding: 5px 1px;
+  border-width: 0px 0px 0px 0px;
+  border-style: solid;
+  color: #222222;
+  background-color: #EEEEEE;
+}
+
+
 .cela_preu_input {
   width: 50px;
   padding: 5px 1px;

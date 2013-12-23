@@ -7,24 +7,39 @@
 <link href="css/taula.css" rel="stylesheet" type="text/css" />
 <body>
 {include file="menu.tpl"}
+{literal}
+<script>
+function informeConsum(provid)
+{
+	var inici = window.prompt("Data inici? (aaaa-mm-dd)");
+	var fi = window.prompt("Data final? (aaaa-mm-dd)");
+	if (inici!=null && fi!=null)
+		location.href="informes.php?informe=consumprov&provid="+provid+"&inici="+inici+"&fi="+fi;
+}	
+</script>
+{/literal}
+
 <h1>Proveïdors</h1>
 <br>
 {$message}
-<br>
-<a href="?action=new">Afegeix un proveidor...</a><br>
-<br>
-Edita un proveidor...<br>
-<table border="1" cellspacing="3" cellpadding="2">
+<table cellspacing="3" cellpadding="2">
 <tr>
-	<td>Proveidor</td>
-	<td>Editar</td>
+	<td class="cela_titol" >Proveidor</td>
+	<td class="cela_titol" >Opcions</td>
 </tr>
 <!--{foreach from=$provs item=prov name=elsprovs}-->
-<tr>
-	<td>{$prov.provnom}</td>
-	<td><a href="?action=edit&provid={$prov.provid}">editar</a></td>
+<tr border="2" >
+	<td class='cela_nom'>{$prov.provnom}</td>
+	<td class='cela_nom'><a href="?action=edit&provid={$prov.provid}">[Editar]</a>
+	<a href="producte.php?provid={$prov.provid}">[Productes]</a>
+	<a href="mostra_productes.php?data={$dia}&provid={$prov.provid}">[Comanda]</a>
+	<a href="#" onclick="javascript:informeConsum({$prov.provid})">[Inf.Consum]</a></td>
 </tr>
 <!--{/foreach}-->
 </table>
+<br>
+<input type="button" value="Afegeix un proveidor" onclick="location.href='?action=new'">
+<br>
+
 </body>
 </html>

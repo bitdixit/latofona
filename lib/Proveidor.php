@@ -25,6 +25,7 @@ Class Proveidor {
 	}
 
 	function add($provArray) {
+		Seguretat::AssertAdministrator();
 		global $db;
 		$sql = "insert into Proveidor values(NULL, '$provArray[provnom]', '$provArray[provtelefon]', '$provArray[provfax]', '$provArray[provextrainfo]', '$provArray[provresponsable]', '$provArray[provtelefonresponsable]')";
 		return $db -> Execute($sql);	

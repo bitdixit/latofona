@@ -24,6 +24,7 @@ function nouIncludePath ( $path ){
 	include_once('adodb/adodb.inc.php');
 	include_once('adodb/tohtml.inc.php'); 
 	include_once('funcions.php');
+	include_once('Seguretat.php');
 	
 	$caixaIP = "127.0.0.1"; //checkout can only be
 //done from these IPs!
@@ -46,5 +47,4 @@ function nouIncludePath ( $path ){
 	if($_SESSION["debug"] === true)
 		$db->debug = true;
 	
-
 ?>

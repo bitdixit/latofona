@@ -20,13 +20,13 @@
 <table border="1px">
 	<tr>
 	<!--{foreach from=$columns item=column name=ccc} -->
-		<td>{$column}</td>
+		<td class="cela_titol"><b>{$column}</b></td>
 	<!--{/foreach} -->
 	<tr>		
 	<!--{foreach from=$rows item=row name=rowss} -->
 		<tr>
 		<!--{foreach from=$columns item=column name=ccc} -->
-			<td>{$row[$column]|replace:".":","}</td>
+			<td class="cela_generica">{$row[$column]|replace:".":","}</td>
 		<!--{/foreach} -->
 		
 		<!--{if $informe == 'vendespendents'} -->
@@ -43,7 +43,7 @@
 <!--{elseif $informe == 'vendesdiadetall'} -->
 	{include file="informe_vendadetall.tpl"}
 <!--{else} -->
-Encara no hi ha resultats per mostrar un informe (per aquest dia)!<br>
+No s'han trobat dades per mostrar<br>
 <!-- {/if} isset(rows) -->
 <!-- {/if} isset(informe) -->
 </body>

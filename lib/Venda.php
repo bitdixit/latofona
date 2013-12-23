@@ -2,7 +2,9 @@
 
 class Venda {
 
-	function checkOut($uf, $data) {
+	function checkOut($uf, $data)
+	{
+		Seguretat::AssertPaymentPC();
 		if($_SESSION["membre"]["memid"] < 1)
 			return false;
 		else 
@@ -104,8 +106,6 @@ class Venda {
 		return $db -> GetAll($sql);	
 	}
 	
-	
-		
 }
 
 ?>

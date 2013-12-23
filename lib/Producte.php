@@ -10,6 +10,13 @@ Class Producte {
 		return $result;
 	
 	}
+	function llistatProductesProveidor ($provid) {
+		$strSQL = "SELECT * from Producte p right join Proveidor pr on (p.prodprov = pr.provid) WHERE pr.provid=".$provid." order by pr.provnom, p.prodnom";
+		global $db;
+		$result = $db->GetAll($strSQL) or die("Error en la sentencia SQL: $strSQL<br/>".$db->ErrorMsg());
+		return $result;
+	
+	}
 	
 	function get($prodid) {
 		$sql = "SELECT * from Producte where prodid=$prodid";

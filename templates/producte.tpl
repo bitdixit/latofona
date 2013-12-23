@@ -15,8 +15,6 @@ function toggleView(elmname) {
 
 function calculateTotalPrice() {
 	percent = document.getElementById('iva').value / 100;
-	//alert (percent);
-	//alert(document.forms[0].preuinicial.value);
 	var preufinal = 0;
 	preufinal = parseFloat(commaReplace(document.forms[0].preuinicial.value)) + parseFloat(commaReplace(document.forms[0].preuinicial.value) * percent);
 	document.getElementById('prodpreu').value = preufinal.toFixed(2);
@@ -38,6 +36,7 @@ function commaReplace(orig) {
 		<form action="producte.php" method="POST">
 			<input type="hidden" name="action" value="{$action}"/>
 			<input type="hidden" name="prodid" value="{$prodid}"/>
+			<input type="hidden" name="provid" value="{$provid}"/>			
 			<tr>
 				<td>proveidor</td>
 				<td>
@@ -45,8 +44,6 @@ function commaReplace(orig) {
 					<!--{foreach from=$provs item=prov name=llistatprovs}-->
 						<!--{if $provid == $prov.provid}-->
 							<option value="{$prov.provid}" selected>{$prov.provnom}</option>
-						<!--{else}-->
-							<option value="{$prov.provid}">{$prov.provnom}</option>
 						<!--{/if}-->
 					<!--{/foreach}-->
 					</select>

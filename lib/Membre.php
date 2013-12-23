@@ -72,6 +72,7 @@ Class Membre {
 	}
 	
 	function create($memuf, $memnom, $memlogin, $mempassword, $memtipus, $memtel, $mememail, $memextrainfo) {
+		Seguretat::AssertAdministrator();
 		global $db;
 		$sql = "insert into Membre (memuf,memnom,memlogin,mempassword, memtipus,memtel,mememail,memextrainfo) values($memuf,'$memnom','$memlogin','".crypt($mempassword, "ax")."', $memtipus,'$memtel','$mememail','$memextrainfo')";
 		if ($db->Execute($sql) === false) 
@@ -80,6 +81,7 @@ Class Membre {
 	}
 	
 	function modify($memid, $memuf, $memnom, $memlogin, $mempassword, $memtipus, $memtel, $mememail, $memextrainfo) {
+		Seguretat::AssertAdministrator();		
 		global $db;
 		if($mempassword != "")
 			$passupdate = "mempassword='".crypt($mempassword, "ax")."',";

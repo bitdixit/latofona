@@ -18,18 +18,21 @@ Class UnitatFamiliar {
 	}
 
 	function add($ufArray) {
+		Seguretat::AssertAdministrator();
 		global $db;
 		$sql = "insert into UnitatFamiliar values($ufArray[ufid], '$ufArray[ufname]', '$ufArray[ufcontact]', '$ufArray[ufaddress]', 0)";
 		return $db -> Execute($sql);	
 	}	
 	
 	function modify($ufid, $ufname, $ufcontact, $ufaddress) {
+		Seguretat::AssertAdministrator();
 		global $db;
 		$sql = "update UnitatFamiliar set ufname='$ufname', ufcontact='$ufcontact', ufaddress='$ufaddress' where ufid=$ufid";
 		return $db -> Execute($sql);	
 	}	
 	
 	function ingressar($ufid, $quantitat, $memid, $nota) {
+		Seguretat::AssertPaymentPC();
 		global $db;
 		$db -> StartTrans();
 		$sql = "insert into Ingres values ($ufid, NOW(), ".sql_float($quantitat).", $memid, '$nota')";

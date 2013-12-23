@@ -71,6 +71,17 @@
 			$smartyObj -> assign("afegit",$venda["venafegit"]);		
 			
 		}
+		elseif($informe == "consumprov") {
+			$proveidor = Proveidor::getById($_REQUEST["provid"]);
+			$inici = $_REQUEST["inici"];
+			$fi = $_REQUEST["fi"];
+			$provid = $_REQUEST["provid"];
+			$smartyObj -> assign("title1","Resum vendes ".$proveidor["provnom"]." del ".$inici." al ".$fi );
+			$smartyObj -> assign("title2","");
+			$rows = LiniaComanda::informeConsum($provid,$inici,$fi);
+			if ($rows==FALSE) $rows=Array();
+			$smartyObj -> assign("multidata","true");
+		}		
 		
 		
 		if(is_array($rows[0])) { //results returned? 

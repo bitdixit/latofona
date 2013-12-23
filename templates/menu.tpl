@@ -92,9 +92,7 @@ Has entrat com <b>{$membre.memnom}</b>
         <div id="m2" 
             onmouseover="mcancelclosetime()" 
             onmouseout="mclosetime()">
-        <a href="producte.php">Gestiò Productes</a>
-        <a href="mostra_productes.php?data={$dia}">Selecciona productes per a commanda</a>
-        <a href="proveidor.php">Gestio Proveïdors</a>
+        <a href="proveidor.php">Gestio Proveïdors/Productes</a>
         <a href="membre.php">Gestio Membres</a>
         <a href="uf.php">Gestio Cistelles (UFs)</a>
 

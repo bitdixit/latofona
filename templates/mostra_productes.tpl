@@ -29,77 +29,58 @@ function allSelectProveidor(truefalse, proveidor) {
 {/literal}
 <body>
 {include  file="menu.tpl"}
-<h1>Productes disponibles per a comanda<br>{$dia}</h1>
+<h1>Productes disponibles per a comanda<br>{$dia} </h1>
+
+<!-- {if !$productes} -->
+
+<h4>No hi han productes dels que es pugui demanar comanda</h4>
+<br>
+<input type="button" onclick="location.href='proveidor.php'" value="< Enrere"/>
+
+<!-- {else} -->
+
 <h4>Selecciona productes disponibles per a commanda.<br>El responsable de cada proveïdor és el responsable d'omplir aquesta graella.</h4>
-<input type=button value="< Comanda anterior" onclick="location.href='mostra_productes.php?data={$dia}&data_direccio=1'">
-<input type=button value="Comanda següent >" onclick="location.href='mostra_productes.php?data={$dia}&data_direccio=2'">
+<input type=button value="< Comanda anterior" onclick="location.href='mostra_productes.php?provid={$provid}&data={$dia}&data_direccio=1'">
+<input type=button value="Comanda següent >" onclick="location.href='mostra_productes.php?provid={$provid}&data={$dia}&data_direccio=2'">
 <br/>
 <b>
-<!--{if $accio == 'send'}-->
-	Selecció de Productes&nbsp;&nbsp;&nbsp;&nbsp;
-	<!--[ <a href="mostra_productes.php?data={$dia}&move=true">moure productes demanats a altre comanda</a> ]-->
-<!--{else}-->
-	Moviment de Productes demanats per aquesta comanda a altre comanda.
-<!--{/if}-->
+Selecció de Productes&nbsp;&nbsp;&nbsp;&nbsp;
 </b>
 <br/><br/>
 <table border="0">
 <tr>
 <td valign="top">
 <form method="post" name="visible" id="visible">
-<!--{if $accio == 'move'} --> 
-<b>moure els sel·leccionats al dia: </b>
-<select type="select" name="movedata" onChange="javascript:visible.movedata2.value=this.value" id="movedata1">
-	<!--{foreach from=$datacomandes item=datacomanda name=dates} -->
-	<option value="{$datacomanda.datdata}">{$datacomanda.datdata}</option>
-	<!-- {/foreach}-->
-</select><br/><br/>
-<!--{/if} -->
+
   <table border="1px" cellspacing="1" cellpadding="1">
     <tbody>
 <!--{foreach from=$productes item=producte name=llistatproductes}-->
-<!--{if $proveidor != $producte.provnom}-->
-<!--{assign var="proveidor" value=$producte.provnom}-->
     <tr>
-    		<td>&nbsp;</td>
-		<td colspan=3>&nbsp;&nbsp;&nbsp;<br/><b>{$producte.provnom}</b>&nbsp;&nbsp;<a name="{$proveidor}"></a>
-			<a href="#{$proveidor}" onClick="javascript:allSelectProveidor(true,'{$proveidor}')">tots</a>&nbsp;
-			<a href="#{$proveidor}" onClick="javascript:allSelectProveidor(false,'{$proveidor}')">cap</a>
-		</td>
-    </tr>
-<!--{/if}-->
-    <tr>
-    	<!--{if $accio == 'send'} --> 
-		<!--{if $producte.prodisstock == -1} --><td><input type="checkbox" checked="true" disabled="true"/></td>
-		<!--{else} -->
-		<td><input name="prod[{$producte[0]}]" id="{$proveidor}" value="{$producte[0]}" type="checkbox" {$producte[3]}/></td>
-		<!--{/if} -->
+	<!--{if $producte.prodisstock == -1} --><td><input type="checkbox" checked="true" disabled="true"/></td>
 	<!--{else} -->
-    		<td class="cell_preu"> moure </td>
-		<td class="cela_checkbox"><input name="prod[{$producte[0]}]"  id="{$proveidor}" value="{$producte[0]}" type="checkbox"/></td>
+	<td><input name="prod[{$producte[0]}]" id="{$proveidor}" value="{$producte[0]}" type="checkbox" {$producte[3]}/></td>
 	<!--{/if} -->
-		<td class='cela_nom'>{$producte[1]}</td>
-		<td class='cela_preu'>{$producte[2]}</td>
+
+	<td class='cela_nom'>{$producte[1]}</td>
+	<td class='cela_preu'>{$producte[2]}</td>
 	
     </tr>
 <!--{/foreach}-->
     </tbody>
   </table><br/>
+
 <a name="bottom"></a>
 <a href="#bottom" onClick="javascript:allSelect(true)">tots</a>&nbsp;
 <a href="#bottom" onClick="javascript:allSelect(false)">cap</a><br/><br/>
-<!--{if $accio == 'move'} --> 
-moure al dia: <select type="select" name="movedata" onChange="javascript:visible.movedata1.value=this.value"  id="movedata2">
-	<!--{foreach from=$datacomandes item=datacomanda name=dates} -->
-	<option value="{$datacomanda.datdata}">{$datacomanda.datdata}</option>
-	<!-- {/foreach}-->
-</select><br/>
-<!--{/if} -->
+
 <br/>  
   <input type="hidden" name="accio" value="{$accio}"/>
   <input type="hidden" name="datDia" value="{$dia}"/>
-  <input type="submit" value="Enviar"/>
+  <input type="button" onclick="location.href='proveidor.php'" value="< Enrere"/>
+  <input type="submit" value="Desar"/>
 </form>
-</td>
+
+<!-- {/if} -->
+
 </body>
 </html>

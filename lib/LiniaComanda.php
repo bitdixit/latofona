@@ -2,6 +2,15 @@
 
 Class LiniaComanda {
 
+
+	function informeConsum ($prodid,$datainici,$datafi)
+	{
+		$strSQL = "SELECT prodnom as 'Nom producte',lcprod,lcpreuunitat as 'Preu unitari',SUM(lcquantitat) AS Quantitat FROM LiniaComanda, Producte WHERE lcprod = prodid AND lcdata >= '".$datainici."' AND lcdata <='".$datafi."' AND prodprov=".$prodid." GROUP BY lcprod,lcpreuunitat";
+		global $db;
+		$res = 	$db->GetAll($strSQL);
+		return $res;
+	}
+
 	function llistatProductes ($intIdUF,$strData, $filter="") {
 		
 		$strSQL = "select p.prodid, p.prodnom, p.prodpreu, ifnull(lc.lcquantitat, 0) as lcquantitat, pr.provnom, pr.provid, lc.lcid, p.prodcode from Producte p left join LiniaComanda lc on (lc.lcprod=p.prodid and lc.lcuf=$intIdUF and lc.lcdata='$strData' and (lc.lcvenda <= 0 or isnull(lc.lcvenda))) inner join Proveidor pr on (p.prodprov=pr.provid)".(($filter == "") ? "" : " where ".$filter)." group by p.prodid order by pr.provnom, p.prodnom";
