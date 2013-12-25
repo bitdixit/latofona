@@ -10,7 +10,7 @@
 {include file="menu.tpl"}
 <h1>Afegir/Modificar membre</h1>
 <br>
-		<font color="red">{$message}</font><br><br>
+		<font color="blue">{$message}</font><br><br>
 		<table>		
 		<form action="membre.php" method="POST">
 			<input type="hidden" name="action" value="{$action}"/>
@@ -20,13 +20,8 @@
 				<td>unitat familiar</td>
 				<td>
 					<select name="memuf">
-						<option value=""><option>
 					<!--{foreach from=$ufs item=uf name=llistatufs}-->
-						<!--{if $memuf == $uf.ufid}-->
-							<option value="{$uf.ufid}" selected>{$uf.ufid} - {$uf.ufname}</option>
-						<!--{else}-->
-							<option value="{$uf.ufid}">{$uf.ufid} - {$uf.ufname}</option>
-						<!--{/if}-->
+						<option value="{$uf.ufid}" selected>{$uf.ufid} - {$uf.ufname}</option>
 					<!--{/foreach}-->
 					</select>
 				</td>
@@ -48,8 +43,10 @@
 			<tr><td>telèfon</td><td><input type="text" name="memtel" value="{$memtel}"/></td></tr>
 			<tr><td>correu electrònic</td><td><input type="text" name="mememail" value="{$mememail}"/></td></tr>
 			<tr><td>informació adicional</td><td><input type="text" name="memextrainfo" value="{$memextrainfo}"/></td></tr>
-			<tr><td colspan="2"><input type="submit" value="enviar"/></td>
+			<tr><td colspan="2"><input type="button" value="< Enrere" onclick="location.href='membre.php'"><input type="submit" value="Desar"/></td>
 		</form>
 		<table>
 	</body>
+	<br>
+	
 </html>

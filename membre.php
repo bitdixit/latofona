@@ -8,7 +8,7 @@
 	$smartyObj -> assign("dia", get_current_date());
 	
 	if($_REQUEST["action"] == "add"){
-		$smartyObj -> assign("action", "create");
+		$smartyObj -> assign("action", "create");                                                                                                                                        
 		$smartyObj -> assign("ufs",UnitatFamiliar::getAll());
 		$smartyObj -> assign("memtipus",0);
 		$smartyObj -> assign("message","omple els camps per afegir un nou usuari...");
@@ -20,7 +20,7 @@
 			$newmemid = Membre::create($_REQUEST["memuf"], $_REQUEST["memnom"], $_REQUEST["memlogin"], $_REQUEST["mempassword"], $_REQUEST["memtipus"], $_REQUEST["memtel"], $_REQUEST["mememail"], $_REQUEST["memextrainfo"]);
 			if($newmemid) { 
 				$smartyObj -> assign("message","s'ha creat el membre  $_REQUEST[memlogin] ($_REQUEST[memnom]) en la unitat familiar ".$_REQUEST["memuf"]);
-				$smartyObj -> assign("membres", $membres = Membre::getAll());		
+				$smartyObj -> assign("membres", $membres = Membre::getAll("memlogin<>''"));		
 				$smartyObj -> display("membreadmin.tpl");
 			}
 			else { 
@@ -62,7 +62,7 @@
 				$smartyObj -> assign("memtel",$_REQUEST["memtel"]);
 				$smartyObj -> assign("mememail",$_REQUEST["mememail"]);
 				$smartyObj -> assign("memextrainfo",$_REQUEST["memextrainfo"]);
-				$smartyObj -> assign("membres", $membres = Membre::getAll());		
+				$smartyObj -> assign("membres", $membres = Membre::getAll("memlogin<>''"));		
 				$smartyObj -> assign("message","s'ha modificat amb èxit l'usuari!");
 				$smartyObj -> display("membreadmin.tpl");
 			}
@@ -81,26 +81,21 @@
 		}
 	}
 	else if ($_REQUEST["action"] == "edit") {
- 	   //var_dump($_SESSION);
-		
 		if(isset($_SESSION["membre"])){
 			if (isset($_REQUEST["memid"])) {
 				$themembre = Membre::get($_REQUEST["memid"]);
- 				//var_dump($membre);
 			}
 			else {
 				$themembre = $_SESSION["membre"];
- 				//var_dump($membre);
 			}
 			
 			foreach($themembre as $key=>$value) {
-// 				echo $key." ".$value."<br>";
 				$smartyObj -> assign($key, $value);
 			}
-//			$smartyObj -> assign("memtipus".$membre["memtipus"]);
 			$smartyObj -> assign("message", "edita aquest usuari...deixa la contrasenya en blanc per mantenir l'actual.");
 			$smartyObj -> assign("action", "modify");
-			$smartyObj -> assign("ufs",UnitatFamiliar::getAll());
+			$ufs = Array ( UnitatFamiliar::get($themembre["memuf"]) );
+			$smartyObj -> assign("ufs",$ufs );
 			$smartyObj -> assign("memuf", $themembre["memuf"]);
 			$smartyObj -> display("membre.tpl");
 		}
@@ -110,7 +105,7 @@
 		// if tipus=1, edit any member..
 		if(isset($_SESSION["membre"])){
 			if($_SESSION["membre"]["memtipus"] == 1)  //only admin users...
-				$smartyObj -> assign("membres", $membres = Membre::getAll());
+				$smartyObj -> assign("membres", $membres = Membre::getAll("memlogin<>''"));
 			
 			$smartyObj -> display("membreadmin.tpl");
 		}

@@ -8,24 +8,20 @@
 <body>
 {include file="menu.tpl"}
 <h1>Gestiò membres</h1>
-<br>
-	<a href="?action=edit">edita l'usuari actual.</a><br>
-	{if $membre.memtipus == 1}
-		<a href="?action=add"><b>afegeix usuari nou</b></a><br>
-	{/if}
-<br><br>
-<font color="red">{$message}</font><br>
+<font color="blue">{$message}</font><br>
 <!--{if $membre.memtipus != 0} //admin user -->
-<table border="1px">
-	<tr><td>UF</td><td>Membre</td><td>Eliminar</td></tr>
+<table>
+	<tr><td class="cela_titol">UF</td><td class="cela_titol">Membre</td><td class="cela_titol">Opcions</td></tr>
 	<!-- {foreach from=$membres item=themembre name=membrelist} -->
 	<tr>
-		<td>{$themembre.memuf}</td>
-		<td><a href="?action=edit&memid={$themembre.memid}">{$themembre.memnom}</a></td>
-		<td>....</td>
+		<td class='cela_generica'>{$themembre.memuf}</td>
+		<td class='cela_generica'>{$themembre.memnom}</td>
+		<td class='cela_generica'><a href="?action=edit&memid={$themembre.memid}">[Editar]</a></td>
 	</tr>
 	<!--{/foreach} -->
 </table>
+<br>
+<input type="button" value="Afegir nou usuari" onclick="location.href='?action=add'">
 <!-- {/if} -->
 </body>
 </html>

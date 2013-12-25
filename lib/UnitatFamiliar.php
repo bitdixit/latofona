@@ -42,19 +42,6 @@ Class UnitatFamiliar {
 		
 		return $db -> CompleteTrans();
 	}
-	/*
-	function llistatProductes($intPid, $strDataInicial, $intNumero) {
-		$strSQL = "select p.idProducte, p.nom,p.preu,if(ifnull(pc.idProducte,0)=0,'','checked') from Producte p left join ProducteComanda pc on (p.idProducte = pc.idProducte and  pc.dataComanda = '".$this -> conv_apos($strData)."');";
-		include_once('adodb/adodb.inc.php');
-		include_once('adodb/tohtml.inc.php'); 
-		$db = ADONewConnection($this -> strDBTipus);
-		//$db->debug = true;
-		$db->PConnect($this -> strHost, $this -> strLogin,$this -> strPassword, $this -> strDBName) or die("Error en la connexi&oacute;<br/>");
-		//$result = $db->Execute($strSQL);
-		$result = $db->GetAll($strSQL) or die("Error en la sentencia SQL: $strSQL<br/>".$db->ErrorMsg());
-		return $result;
-	}
-	*/
 }
 
 ?>
