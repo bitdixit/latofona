@@ -10,35 +10,26 @@
 <h1>Cistelles/UF</h1>
 <br>
 {$message}
-<br>
-<a href="?action=new">Afegeix una unitat familiar...</a><br>
-<br>
-Edita una unitat familiar...<br>
-<table border="1" cellspacing="3" cellpadding="2">
+<!-- <a href="?action=new">Afegeix una unitat familiar...</a><br> -->
+<table cellspacing="3" cellpadding="2">
 <tr>
-	<td>Num UF</td>
-	<td>Nom UF</td>
-	<!-- <dunetna> canvi de literal
-	<td>Val</td> -->
-	<td>Crèdit</td>
-	<!-- </dunetna> -->
-	<td>Editar</td>
-	<!-- <dunetna> canvi de literal 
-	<td>Ingresar al val</td> -->
-	<td>Ingressar</td>
-	<!-- </dunetna> -->
+	<td class="cela_titol">Num UF</td>
+	<td class="cela_titol">Nom UF</td>
+	<td class="cela_titol">Crèdit</td>
+	<td class="cela_titol">Opcions</td>
 </tr>
 <!--{foreach from=$ufs item=uf name=elsufs}-->
 <tr>
-	<td>{$uf.ufid}</td>
-	<td>{$uf.ufname}</td>
-	<td>{$uf.ufval} &euro;</td>
-	<td><a href="?action=edit&ufid={$uf.ufid}">editar</a></td>
+	<td class='cela_generica'>{$uf.ufid}</td>
+	<td class='cela_generica'>{$uf.ufname}</td>
+	<td class='cela_generica'>{$uf.ufval} &euro;</td>
+	<td class='cela_generica'><a href="?action=edit&ufid={$uf.ufid}">[Editar]</a>
 	<!-- {if $membre.memuf != $uf.ufid} -->
-		<td><a href="?action=ingres&ufid={$uf.ufid}">ingressar</a></td> 
+		<a href="?action=ingres&ufid={$uf.ufid}">[Ingressar]</a> 
 	<!-- {else} -->
 		<td>&nbsp;</td> 
 	<!-- {/if} -->
+	</td>
 </tr>
 <!--{/foreach}-->
 </table>
