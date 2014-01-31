@@ -22,7 +22,7 @@
 	}
 	
 	if ($_REQUEST['accio'] == "send") {
-		if(ProducteComanda::insertarProductesAComanda($_REQUEST["prod"],$_REQUEST["datDia"]))
+		if(ProducteComanda::insertarProductesAComanda($provid,$_REQUEST["prod"],$_REQUEST["datDia"]))
 			$smartyObj -> assign("message", "s'ha verificat els productes al dia de la comanda.");
 		else 
 			$smartyObj -> assign("message", "no s'ha pogut insertar els productes al dia de la comanda");
