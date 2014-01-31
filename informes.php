@@ -38,7 +38,7 @@
 		}		
 		elseif($informe == "ingresos") {
 			$smartyObj -> assign("title1","Ultims ingressos");
-			$rows = Ingres::getList("1=1 order by indata desc, inuf asc LIMIT 200");
+			$rows = Ingres::getList();
 			$smartyObj -> assign("multidata","true");
 		}
 		elseif($informe == "ingresostotalsperdia") {
