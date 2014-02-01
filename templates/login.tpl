@@ -13,25 +13,13 @@
 {/literal}
 <body>
 <center>
-<img src="img/titol.png" alt="La Tòfona" onclick="entra()" /><br>
-<img src="img/tofonaPetita.png"" />
- <br>
+<img src="img/tofona.jpg"" />
 <form method="post" name="visible" id="visible">
-  <table border="0" cellspacing="0" cellpadding="0">
-    <tbody>
-    <tr>
-		<td class='cela_nom'>Login:</td>
-		<td class='cela_nom'><input name="login" /></td>
-    </tr>
-    <tr>
-		<td class='cela_nom'>Password:</td>
-		<td class='cela_nom'><input type="password" name="passwd" /></td>
-    </tr>
-    </tbody>
-  </table><br/>
- <br>
+	hola tòfona<br><br>
+	soc <input name="login" /><br>
+	i sé la clau d'entrada <input type="password" name="passwd" /><br><br>
   <input type="hidden" name="accio" value="send"/>
-  <input type="submit" value="Validar"/>
+  <input type="submit" value="alimenta'm!"/>
 </form>
  </center>
 </body>
