@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Temps de generació: 07-11-2013 a les 11:52:07
+-- Temps de generació: 01-02-2014 a les 02:13:10
 -- Versió del servidor: 5.1.66
 -- Versió de PHP : 5.3.3-7+squeeze16
 
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `Data` (
   `datestat` tinyint(3) unsigned DEFAULT '0',
   PRIMARY KEY (`datid`),
   UNIQUE KEY `datdata` (`datdata`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=410 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=431 ;
 
 -- --------------------------------------------------------
 
@@ -66,7 +66,25 @@ CREATE TABLE IF NOT EXISTS `LiniaComanda` (
   KEY `users` (`lcuf`),
   KEY `data` (`lcdata`),
   KEY `lcprod` (`lcprod`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=444413 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=444796 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de la taula `Log`
+--
+
+CREATE TABLE IF NOT EXISTS `Log` (
+  `lgid` int(11) NOT NULL AUTO_INCREMENT,
+  `lgdate` datetime NOT NULL,
+  `lgwho` char(255) NOT NULL,
+  `lgwhoufid` int(11) NOT NULL,
+  `lgwhat` varchar(2000) NOT NULL,
+  `lgwhatobj` varchar(255) NOT NULL,
+  `lgwhatobjid` int(11) NOT NULL,
+  `lgwhatobjty` enum('UF','PROV','GENERAL') NOT NULL,
+  PRIMARY KEY (`lgid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=69 ;
 
 -- --------------------------------------------------------
 
@@ -86,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `Membre` (
   `memextrainfo` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`memid`),
   KEY `memuf` (`memuf`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=164 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=166 ;
 
 -- --------------------------------------------------------
 
@@ -108,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `Producte` (
   `prodstockmax` int(11) DEFAULT '0',
   `prodstockactual` float(10,2) DEFAULT '0.00',
   PRIMARY KEY (`prodid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1361 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1367 ;
 
 -- --------------------------------------------------------
 
@@ -146,7 +164,7 @@ CREATE TABLE IF NOT EXISTS `ProducteHistoric` (
   `data` date NOT NULL,
   `prodpreu` float(10,2) NOT NULL,
   UNIQUE KEY `prodid` (`prodid`,`data`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -163,7 +181,7 @@ CREATE TABLE IF NOT EXISTS `Proveidor` (
   `provresponsable` varchar(255) DEFAULT NULL,
   `provtelefonresponsable` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`provid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=82 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=93 ;
 
 -- --------------------------------------------------------
 
@@ -209,4 +227,4 @@ CREATE TABLE IF NOT EXISTS `Venda` (
   `vensubtotal` float(10,2) NOT NULL DEFAULT '0.00',
   `venafegit` float(10,2) NOT NULL DEFAULT '0.00',
   PRIMARY KEY (`venid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9367 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9418 ;
