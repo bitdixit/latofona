@@ -7,6 +7,7 @@
 	include_once("Ingres.php");
 	include_once("Informe.php");
 	include_once("Proveidor.php");
+	include_once("Log.php");
 	
 	$smartyObj = new Smarty;
 	$smartyObj -> assign("membre",$_SESSION["membre"]);
@@ -36,9 +37,10 @@
 			$rows = Venda::getTotals();
 			$smartyObj -> assign("multidata","true");
 		}		
-		elseif($informe == "ingresos") {
-			$smartyObj -> assign("title1","Ultims ingressos");
-			$rows = Ingres::getList();
+		elseif($informe == "registre") {
+			
+			$smartyObj -> assign("title1","Registre operacions");
+			$rows = Log::ListLogs();
 			$smartyObj -> assign("multidata","true");
 		}
 		elseif($informe == "ingresostotalsperdia") {
@@ -69,8 +71,22 @@
 			$smartyObj -> assign("subtotal",$venda["vensubtotal"]);
 			$smartyObj -> assign("total",$venda["vensubtotal"]+$venda["venafegit"]);		
 			$smartyObj -> assign("afegit",$venda["venafegit"]);		
-			
 		}
+		elseif($informe == "uflogs") {
+			$rows =  Log::ListUFLogs($_REQUEST["ufid"]);
+			$smartyObj -> assign("title1","Registre operacions UF ".$_REQUEST["ufid"]);
+			$smartyObj -> assign("title2","");
+			if ($rows==FALSE) $rows=Array();
+			$smartyObj -> assign("multidata","true");
+		}
+		elseif($informe == "provlogs") {
+			$rows =  Log::ListProveidorLogs($_REQUEST["provid"]);
+			$smartyObj -> assign("title1","Registre operacions proveidor ".$_REQUEST["provid"]);
+			$smartyObj -> assign("title2","");
+			if ($rows==FALSE) $rows=Array();
+			$smartyObj -> assign("multidata","true");
+		}
+
 		elseif($informe == "consumprov") {
 			$proveidor = Proveidor::getById($_REQUEST["provid"]);
 			$inici = $_REQUEST["inici"];

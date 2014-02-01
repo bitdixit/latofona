@@ -18,6 +18,7 @@ Class LiniaComanda {
 //  		$db->debug = true;
 		$arrayResult = array();
 		$indexResult = 0;
+		$db->SetFetchMode(ADODB_FETCH_BOTH);
 		$result = $db->Execute($strSQL);
 		if (!$result) {
 			echo "Sense files";

@@ -43,6 +43,10 @@ class Venda {
 		
 		$total = $subtotal + $venafegit;
 		
+		$ufrow = UnitatFamiliar::get($uf);
+		$notalog = "VENDA ".$total."€ (SALDO ".$ufrow["ufval"]."->".($ufrow["ufval"]-$total).")";		
+		Log::AddLogUF($notalog,$uf);
+
 		// discount total from ufval
 		$sql = "update UnitatFamiliar set ufval=ufval-$total where ufid=$uf";
 		$db -> Execute($sql);

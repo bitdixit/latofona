@@ -22,20 +22,13 @@ Class ProducteComanda {
 		return $result;
 	}
 
-	function insertarProducteAComanda ($idProducte, $strData) {
-		$strSQL = "INSERT INTO ProducteComanda (pcprodid,pcdata) VALUES ('".conv_apos($idProdcute);
-		$strSQL .="','".conv_apos($strData)."')";
-		global $db;
-		//$db->debug = true;
-		$recordSet = $db->Execute($strSQL);
-	}
-	
 	function borrarProducteAComanda ($idProducte, $strData) {
 	}
 	
 	function insertarProductesAComanda($provid,$idProductes, $strData) {
 	/*El mateix que un pero $idProductes és un Array*/
 		global $db;
+		$db -> StartTrans();
 		//$db->debug = true;
 		/* Aquí hauria de començar una transacció*/
 		/* Borrem tots els productes d'aquell dia */
@@ -47,8 +40,9 @@ Class ProducteComanda {
 			$strSQL .="','".conv_apos($strData)."')";
 			$recordSet = $db->Execute($strSQL);
 			$recordSet -> Close();
-			}
-		/* Acabar-la aquí... Commit o Rollback */
+		}
+		Log::AddLogProveidor("Modificada comanda dia $strData", $provid);	
+		return $db -> CompleteTrans();
 	}
 
 

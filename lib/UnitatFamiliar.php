@@ -1,5 +1,7 @@
 <?php
 
+include_once('Log.php');
+
 Class UnitatFamiliar {
 	
 	function getAll($filter="") {
@@ -12,8 +14,9 @@ Class UnitatFamiliar {
 	function get($ufid) {
 		global $db;
 		$sql = "select * from UnitatFamiliar where ufid=$ufid";
-		$db->SetFetchMode(ADODB_FETCH_ASSOC);
+		$fetchMode=$db->SetFetchMode(ADODB_FETCH_ASSOC);
 		$rs = $db->GetAll($sql);
+		$db->SetFetchMode($fetchMode);
 		return $rs[0];	
 	}
 
@@ -31,12 +34,22 @@ Class UnitatFamiliar {
 		return $db -> Execute($sql);	
 	}	
 	
-	function ingressar($ufid, $quantitat, $memid, $nota) {
+	function ingressar($ufid, $quantitat, $memid, $nota)
+	{
+		if ($quantitat==0) return true;
+ 
 		Seguretat::AssertPaymentPC();
+		
 		global $db;
 		$db -> StartTrans();
+
+		$ufrow = UnitatFamiliar::get($ufid);
+		$notalog = "INGRES ".$quantitat."€ (SALDO ".$ufrow["ufval"]."->".($ufrow["ufval"]+$quantitat).") ".$nota;		
+		Log::AddLogUF($notalog,$ufid);
+
 		$sql = "insert into Ingres values ($ufid, NOW(), ".sql_float($quantitat).", $memid, '$nota')";
 		$db -> Execute($sql);
+		
 		$sql = "update UnitatFamiliar set ufval=ufval+$quantitat where ufid=$ufid";
 		$db -> Execute($sql);
 		

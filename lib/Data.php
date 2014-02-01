@@ -1,5 +1,7 @@
 <?php
 
+include_once("Log.php");
+
 Class Data {
 	
 	function comandaActual () {
@@ -67,6 +69,7 @@ Class Data {
 		Seguretat::AssertAdministrator();
 		global $db;
 // 		$db -> debug = true;
+		Log::AddLogGeneral("Afegida data $year-$month-$day");
 		$sql = "insert into Data (datdata, datestat) values ('$year-$month-$day', 1)";
 		$db->Execute($sql);
 	}

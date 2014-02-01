@@ -33,7 +33,8 @@ function informeConsum(provid)
 	<td class='.cela_generica'><a href="?action=edit&provid={$prov.provid}">[Editar]</a>
 	<a href="producte.php?provid={$prov.provid}">[Productes]</a>
 	<a href="mostra_productes.php?data={$dia}&provid={$prov.provid}">[Comanda]</a>
-	<a href="#" onclick="javascript:informeConsum({$prov.provid})">[Inf.Consum]</a></td>
+	<a href="#" onclick="javascript:informeConsum({$prov.provid})">[Inf.Consum]</a>
+	<a href="informes.php?informe=provlogs&provid={$prov.provid}">[Registre]</a></td>
 </tr>
 <!--{/foreach}-->
 </table>

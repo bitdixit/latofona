@@ -3,6 +3,8 @@
 The membre class
 */
 
+include_once("Log.php");
+
 Class Membre {
 
 	var $memid;
@@ -75,9 +77,10 @@ Class Membre {
 		Seguretat::AssertAdministrator();
 		global $db;
 		$sql = "insert into Membre (memuf,memnom,memlogin,mempassword, memtipus,memtel,mememail,memextrainfo) values($memuf,'$memnom','$memlogin','".crypt($mempassword, "ax")."', $memtipus,'$memtel','$mememail','$memextrainfo')";
-		if ($db->Execute($sql) === false) 
-			return false; 
-		else return true;
+		$db -> StartTrans();		
+		$db->Execute($sql);
+		Log::AddLogGeneral("Afegit membre ".$memlogin." ".$memnom." UF".$memuf);
+		return $db->CompleteTrans();
 	}
 	
 	function modify($memid, $memuf, $memnom, $memlogin, $mempassword, $memtipus, $memtel, $mememail, $memextrainfo) {
@@ -86,9 +89,10 @@ Class Membre {
 		if($mempassword != "")
 			$passupdate = "mempassword='".crypt($mempassword, "ax")."',";
 		$sql = "update Membre set memuf=$memuf, memnom='$memnom', memlogin='$memlogin',$passupdate memtipus='$memtipus', memtel='$memtel', mememail='$mememail', memextrainfo='$memextrainfo' where memid=$memid";
-		if ($db->Execute($sql) === false) 
-			return false; 
-		else return true;
+		$db -> StartTrans();		
+		$db->Execute($sql); 
+		Log::AddLogGeneral("Modificat membre ".$memlogin." ".$memnom." UF".$memuf);
+		return $db->CompleteTrans();
 		  
 	}
 }

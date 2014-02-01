@@ -2,6 +2,7 @@
 	include('capcelera.php');
 	include_once('UnitatFamiliar.php');
 	include_once('Membre.php');
+	include_once('Log.php');
 	
 	if ($_REQUEST["accio"] == "send") {
 		$membre = Membre::validate($_REQUEST["login"],$_REQUEST["passwd"]);
@@ -11,6 +12,7 @@
 // 			echo "logged in";
 //			header("Location: http://" . $_SERVER['HTTP_HOST'] . "/llista_productes_uf.php");
 // [moni] Canvio el header per tal que no es redirigeixi a l'arrel del servidor
+			Log::AddLogUF("Login",$membre["memuf"]);
 			header("Location: novetats.php");
 		}	
 		else {	

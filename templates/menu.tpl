@@ -80,9 +80,9 @@ Has entrat com <b>{$membre.memnom}</b>
             onmouseout="mclosetime()">
         <a href="informes.php?informe=vendespendents">Vendes Pendents</a>
         <a href="informes.php?informe=ingresostotalsperdia">Ingresos Totals Per Dia</a>
-        <a href="informes.php?informe=ingresos">Ultims ingressos</a>
         <a href="comanda_proveidors.php">Comandes (totals) a proveïdors</a>
         <a href="informes.php?informe=vendestotals">Vendes Totals Per tots els Dies</a>
+        <a href="informes.php?informe=registre">Registre operacions</a>
         </div>
     </li>
 <!--{if $membre.memtipus == 1 }-->

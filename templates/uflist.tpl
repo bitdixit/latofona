@@ -24,6 +24,7 @@
 	<td class='cela_generica'>{$uf.ufname}</td>
 	<td class='cela_generica'>{$uf.ufval} &euro;</td>
 	<td class='cela_generica'><a href="?action=edit&ufid={$uf.ufid}">[Editar]</a>
+	<a href="informes.php?informe=uflogs&ufid={$uf.ufid}">[Registre]</a>
 	<!-- {if $membre.memuf != $uf.ufid} -->
 		<a href="?action=ingres&ufid={$uf.ufid}">[Ingressar]</a> 
 	<!-- {else} -->

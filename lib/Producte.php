@@ -51,10 +51,10 @@ Class Producte {
 		(($prodstockmax != "") ? ($sql .= $prodstockmax.",") : ($sql .= "NULL,")) ; 
 		(($prodstockactual != "") ? ($sql .= sql_float($prodstockactual).")") : ($sql .= "0)")) ; 
 		
-		$res = $db->Execute($sql);
-		if($res === false)
-			return false;
-		else return true;
+		$db -> StartTrans();
+		$db -> Execute($sql);
+		Log::AddLogProveidor("Afegit producte ".$db->Insert_ID()." ".$prodnom, $prodprov);	
+		return $db -> CompleteTrans();
 	}
 	
 	function modify ($prodid, $prodprov, $prodnom, $prodcode, $prodpreuinicial, $prodiva, $prodpreu, $prodisstock, $prodstockmin, $prodstockmax, $prodstockactual) {
@@ -65,7 +65,11 @@ Class Producte {
 		(($prodstockmax != "") ? ($sql .= "prodstockmax=".$prodstockmax.",") : ($sql .= "prodstockmax=NULL,")) ; 
 		(($prodstockactual != "") ? ($sql .= "prodstockactual=".sql_float($prodstockactual)) : ($sql .= "prodstockactual=0")) ; 
 		$sql .= " where prodid=$prodid";
-		return $db->Execute($sql);
+
+		$db -> StartTrans();
+		$db -> Execute($sql);
+		Log::AddLogProveidor("Modificat producte ".$prodid." ".$prodnom,  $prodprov);	
+		return $db -> CompleteTrans();
 	}
 	
 	function addStock($prodid, $stocktoadd, $memid) {
