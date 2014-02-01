@@ -15,6 +15,7 @@
 <!-- {if $datalast != ''} --><input type="button" onclick="location.href='?informe={$informe}&data={$datalast}'" value="< Anterior data"><!--{/if} -->
  &nbsp;<!-- {if $datanext != ''} --><input type="button" onclick="location.href='?informe={$informe}&data={$datanext}'" value="Seguent data >"> <!--{/if} --><br><br>
 <!--{/if} -->
+<input type="button" onclick="window.history.back();" value="< Enrere">
 <br>
 <!-- {if isset($rows) } -->
 <table border="1px">

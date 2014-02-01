@@ -65,13 +65,11 @@ function posaQuantitat() {
 	document.getElementById('codi').focus();
 }
 
-/*<dunetna>*/
 function posarEnBlanc(obj){
 	if(parseInt(obj.value)==0){
 		obj.value="";
 	}
 }
-/*</dunetna>*/
 
 </script>
 {/literal}
@@ -131,10 +129,7 @@ function posarEnBlanc(obj){
 		<td class='cela_titol' width="40">{$producte[0]}</td>
 		<td class='cela_nom'>{$producte[1]}</td>
 		<td class='cela_preu'>{$producte[2]}</td>
-		<!-- <dunetna> canvi d'event i afegir un altre event
-		<td><input name="prod_{$producte[0]}" value="{$producte[3]}" size="10" class='cela_preu_input' onChange="javascript:recalcularAcumulat({$producte[0]})"/></td>-->
 		<td><input name="prod_{$producte[0]}" value="{$producte[3]}" size="10" class='cela_preu_input' onfocus="posarEnBlanc(this)" onkeyup="javascript:recalcularAcumulat({$producte[0]})"/></td>
-		<!-- </dunetna> -->
 		<td><input name="acum_{$producte[0]}" size="10" class='cela_preu' disabled/></td>
 		<td><input type="hidden" name="preu_{$producte[0]}" value="{$producte[2]}" /></td>
 		<script>

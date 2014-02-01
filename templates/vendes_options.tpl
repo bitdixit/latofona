@@ -13,13 +13,11 @@ Algú d'una altra unitat familiar t'ha de vendre.</h4>
 <form method="GET">
 	<select name="uf">
 <!--{foreach from=$ufs item=uf name=lauf}-->
-	<!-- <dunetna> Afegim la selecció per defecte -->
 	<!--{if $uflog == $uf.ufid}-->
 		<option value="{$uf.ufid}" selected="selected">{$uf.ufid} - {$uf.ufname}</option>
 	<!--{else}-->
 		<option value="{$uf.ufid}">{$uf.ufid} - {$uf.ufname}</option>
 	<!--{/if}-->
-	<!-- </dunetna -->
 <!--{/foreach}-->
 	</select>
 	<select name="data">
@@ -29,7 +27,7 @@ Algú d'una altra unitat familiar t'ha de vendre.</h4>
 <!--{/foreach}-->
 	</select>
 <br><br/>
-	<input type="submit" value="vendre a aquesta UF ---->"/>
+	<input type="submit" value="Vendre a aquesta UF >"/>
 </form>
 <br><br>
 

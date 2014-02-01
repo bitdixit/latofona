@@ -10,20 +10,19 @@
 {include file="menu.tpl"}
 
 
-
 <!--{if $action != 'checkout'} -->
     <h1>Confirmada venda dia {$dia}<br>Unitat Familiar {$uf}</h1>
 	Unitat Familiar {$UF.ufid} - <b>{$UF.ufname}</b> ha gastat {$total}&euro;<br>
 	Li queda: <font color="red"><b>{$UF.ufval}</b></font><br><br><br>
 	
-	<a href="vendes.php">altre venda?</a><br><br>
+	<input type="button" onclick="location.href='vendes.php'" value="Realitzar altre venda"/><br><br>
 <!--{else} --> 
 	<!--{if $uf != $membre.memuf}-->
-	    <h1>Confirmar venda dia {$dia}<br>Unitat Familiar {$uf}<br>i afegir credit</h1>
+	    <h1>Confirmar venda dia {$dia}<br>Unitat Familiar {$uf} i afegir credit</h1>
 	<!--{else} -->
 	    <h1>Actualitzada venda dia {$dia}<br>Unitat Familiar {$uf}</h1>
     <!--{/if} -->
-	<input type="button" value="< Torna enrera per modificar productes o quantitats" onclick='location.href="vendes.php?uf={$uf}&data={$dia}"'><br><br>
+
 <!-- {/if} -->
 
 <!--{if count($productes) > 0 }-->
@@ -76,40 +75,30 @@
     </tr>
   </table><br/>
 	<!--{if $action == 'checkout'} -->   
-<table border="1px">
+<table border="0px">
 <tr>
-	<!--<dunetna> canvi de literal
-	<td>Val d'estoc abans de la compra: </td>-->
-	<td>Crèdit abans de la compra: </td>
-	<!--</dunetna>-->
+	<td>Crèdit abans de la compra:</td>
 	<td>{$UF.ufval} &euro;</td>
 </tr>
 <tr>
-	<!--<dunetna> canvi de literal
-	<td>Val d'estoc despr�s ser�: </td><td><b>{$nouval} &euro;</b></td>-->
-	<td>Crèdit després serà: </td><td><b>{$nouval} &euro;</b></td>
-	<!--</dunetna>-->
+	<td>Crèdit després serà: </td>
+	<td><b>{$nouval} &euro;</b></td>
 </tr>
 </table>  
 <br><br>
 	<!--{if $uf != $membre.memuf}-->
 		<!--{if $goodip == 'true'} -->
-			<!--<dunetna> canvi de literal
-			<b>AFEGIR VAL D'ESTOC!!!<b><br/>-->
-			<b>AFEGIR CRÈDIT!!!<b><br/>
-			<!--</dunetna>-->
-			<table> 
-				<tr><td>quantitat:</td> <td><input type="text" name="inquantitat"/></td></tr>
-				<!--<dunetna> Error de tag mal tancat
-				<tr><td>nota (opcional):</td> <td><input type="text" name="innota"</td></tr>-->
-				<tr><td>nota (opcional):</td> <td><input type="text" name="innota" /></td></tr>
-				<!--</dunetna>-->
-				<tr><td>persona ingresant:</td> <td><input type="hidden" name="inmemid" value="{$membre.memid}"/>{$membre.memnom}</td></tr>
+			<b>Afegir crèdit<b><br/>
+			<table border=0> 
+				<tr><td>Quantitat:</td> <td><input type="text" name="inquantitat"/></td></tr>
+				<tr><td>Nota (opcional):</td> <td><input type="text" name="innota" /></td></tr>
+				<tr><td>Persona ingresant:</td> <td><input type="hidden" name="inmemid" value="{$membre.memid}"/>{$membre.memnom}</td></tr>
 			</table>	
 		    
 		    <br/><br/>
 			<input type="hidden" name="accio" value="{$action}"/>
-			<input type="submit" value="Siiiiiiiii ->"/>
+			<input type="button" value="< Modificar venda" onclick='location.href="vendes.php?uf={$uf}&data={$dia}"'>&nbsp;
+			<input type="submit" value="Finalitzar venda>"/>
 			</form>
 		<!--{else} -->
 			<b>NO ET POTS COBRAR/COMPRAR DES D'AQUEST ORDINADOR<br>La compra ha estat gravada però encara no s'ha cobrat.<br>Passa per caixa si us plau.</b>

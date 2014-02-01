@@ -38,7 +38,7 @@ function commaReplace(orig) {
 			<input type="hidden" name="prodid" value="{$prodid}"/>
 			<input type="hidden" name="provid" value="{$provid}"/>			
 			<tr>
-				<td>proveidor</td>
+				<td>Proveidor</td>
 				<td>
 					<select name="prodprov">
 					<!--{foreach from=$provs item=prov name=llistatprovs}-->
@@ -50,57 +50,40 @@ function commaReplace(orig) {
 				</td>
 			</tr>
 			<tr>
-				<!-- <dunetna> canvi de literal
-				<td>nom y descripci� breu del producte</td>-->
-				<td>nom i descripció breu del producte</td>
-    <!-- </dunetna> -->
+				<td>Nom i descripció breu del producte</td>
 				<td><input type="text" name="prodnom" value="{$prodnom}" size="110"/></td></tr>
-			<tr><td>codi del producte</td><td><input type="text" name="prodcode" value="{$prodcode}" size="20"/></td></tr>
+			<tr><td>Codi del producte</td><td><input type="text" name="prodcode" value="{$prodcode}" size="20"/></td></tr>
 			<tr>
-				<!-- <dunetna> canvi de literal
-				<td>preu inicia del producte</td>-->
-				<td>preu sense IVA</td>
-				<!-- </dunetna> -->
-				<!-- <dunetna> canvi d'event
-				<td><input id="preuinicial" type="text" name="prodpreuinicial" value="{$prodpreuinicial}" size="10" onBlur="javascript:calculateTotalPrice()"/> &euro;</td>-->
+				<td>Preu sense IVA</td>
 				<td><input id="preuinicial" type="text" name="prodpreuinicial" value="{$prodpreuinicial}" size="10" onkeyup="javascript:calculateTotalPrice()"/> &euro;</td>
-				<!-- </dunetna> -->
 			</tr>
 			<tr>
 				<td>IVA aplicable al preu</td>
-				<!-- <dunetna> canvi d'event
-				<td><input id="iva" type="text" name="prodiva" value="{$prodiva}" size="2" onBlur="javascript:calculateTotalPrice()"/>%</td>-->
 				<td><input id="iva" type="text" name="prodiva" value="{$prodiva}" size="2" onkeyup="javascript:calculateTotalPrice()"/>%</td>
-				<!-- </dunetna> -->
 			</tr>
 			<tr>
-				<!-- <dunetna> canvi de literal
-				<td>preu del producte</td>-->
-				<td>preu amb IVA</td>
-				<!-- </dunetna> -->
-				<!-- <dunetna> posar camp nom�s lectura 
-				<td><input type="text" id="prodpreu" name="prodpreu" value="{$prodpreu}" size="10"/> &euro;</td>-->
+				<td>Preu amb IVA</td>
 				<td><input type="text" id="prodpreu" name="prodpreu" value="{$prodpreu}" size="10" readonly="readonly"/> &euro;</td>
 			</tr>
-			<tr><td>producte estoc?</td>
+			<tr><td>Producte estoc?</td>
 				<td>
 				<select name="prodisstock">
 					{$stockselect}
-					<option value="1">estoc</option>
-					<option value="0">fresc</option>
-					<option value="-1">fresc permanent (cada setmana)</option>
+					<option value="1">Estoc</option>
+					<option value="0">Fresc</option>
+					<option value="-1">Fresc permanent (cada setmana)</option>
 				</select>
 				</td>
 			</tr>
-			<tr><td>estoc mínim</td><td><input type="text" name="prodstockmin" value="{$prodstockmin}" size="10"/></td></tr>
-			<tr><td>estoc màxim</td><td><input type="text" name="prodstockmax" value="{$prodstockmax}" size="10"/></td></tr>
-			<tr><td>estoc actual</td><td>
+			<tr><td>Estoc mínim</td><td><input type="text" name="prodstockmin" value="{$prodstockmin}" size="10"/></td></tr>
+			<tr><td>Estoc màxim</td><td><input type="text" name="prodstockmax" value="{$prodstockmax}" size="10"/></td></tr>
+			<tr><td>Estoc actual</td><td>
 				<!-- {if $action == 'modify'} -->
 				 (Per afegir estoc, torna a la pàgina anterior. Ajusta l'estoc aquí només quan sigui necessari...)<br/>
 				<!-- {/if} -->
 				<input type="text" name="prodstockactual" value="{$prodstockactual}" size="10"/>
 			</td></tr>
-			<tr><td colspan="2"><input type="submit" value="enviar"/></td>
+			<tr><td colspan="2"><input type="button" value="< Enrere" onclick="window.history.back()"><input type="submit" value="Desar"/></td>
 		</form>
 		<table>
 	</body>

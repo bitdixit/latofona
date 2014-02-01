@@ -61,13 +61,11 @@ function posaQuantitat() {
 	document.getElementById('codi').focus();
 }
 
-/*<dunetna>*/
 function posarEnBlanc(obj){
 	if(parseInt(obj.value)==0){
 		obj.value="";
 	}
 }
-/*</dunetna>*/
 
 </script>
 {/literal}

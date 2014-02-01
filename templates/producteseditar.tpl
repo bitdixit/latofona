@@ -43,8 +43,7 @@ function confirmAndGo(msg,url)
 		<!--{if $stockedit=='true'} -->
 		<td class='cela_titol'>Estoc a afegir</td>
 		<!--{else}-->
-		<td class='cela_titol' width="20">editar</td>
-		<td class='cela_titol' width="20">eliminar</td>
+		<td class='cela_titol'>Opcions</td>
 		<!--{/if}-->
 		<td></td>
 
@@ -63,8 +62,8 @@ function confirmAndGo(msg,url)
 		<!--{if $stockedit=='true'} -->
 		<td align="center" width="70"><input type="text" name="prod[{$producte.prodid}]" size="5"/>
 		<!--{else}-->
-		<td><a href="producte.php?action=edit&prodid={$producte.prodid}">editar</a></td>
-		<td><a href="#" onclick="javascript:confirmAndGo('Segur?','producte.php?action=delete&provid={$provid}&prodid={$producte.prodid}')">eliminar</a></td>
+		<td class='cela_generica'><a href="producte.php?action=edit&prodid={$producte.prodid}">[Editar]</a>
+		<a href="#" onclick="javascript:confirmAndGo('Segur?','producte.php?action=delete&provid={$provid}&prodid={$producte.prodid}')">[Eliminar]</a></td>
 		<!--{/if}--></td>
     </tr>
 

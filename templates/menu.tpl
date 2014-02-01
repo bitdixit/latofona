@@ -1,10 +1,7 @@
 {literal}
 <script>
 	function confirmExit() {
-		//<dunetna>Canvi de literal
-		//var ret = confirm (" Si surts ara perds totes les dades introdu�des.\n Per gravar els canvis has d'apretar el bot� de CONFIRMAR. \n Segur que vols sortir?!?!?!? ");
 		var ret = confirm (" Si surts ara perds totes les dades introduïdes.\n Per gravar els canvis has d'apretar el botó de VALIDAR. \n Segur que vols sortir?!?!?!? ");
-		//</dunetna>
 
 		if (ret)
 			window.location = "login.php?accio=logout";

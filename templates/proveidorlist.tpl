@@ -30,7 +30,7 @@ function informeConsum(provid)
 <!--{foreach from=$provs item=prov name=elsprovs}-->
 <tr border="2" >
 	<td class='cela_generica'>{$prov.provnom}</td>
-	<td class='.cela_generica'><a href="?action=edit&provid={$prov.provid}">[Editar]</a>
+	<td class='cela_generica'><a href="?action=edit&provid={$prov.provid}">[Editar]</a>
 	<a href="producte.php?provid={$prov.provid}">[Productes]</a>
 	<a href="mostra_productes.php?data={$dia}&provid={$prov.provid}">[Comanda]</a>
 	<a href="#" onclick="javascript:informeConsum({$prov.provid})">[Inf.Consum]</a>
