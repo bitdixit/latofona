@@ -90,8 +90,7 @@ Has entrat com <b>{$membre.memnom}</b>
             onmouseover="mcancelclosetime()" 
             onmouseout="mclosetime()">
         <a href="proveidor.php">Gestio Proveïdors/Productes</a>
-        <a href="membre.php">Gestio Membres</a>
-        <a href="uf.php">Gestio Cistelles (UFs)</a>
+        <a href="uf.php">Gestio UF/Membres</a>
 
         </div>
     </li>

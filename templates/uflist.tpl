@@ -13,10 +13,11 @@
 <!-- <a href="?action=new">Afegeix una unitat familiar...</a><br> -->
 <table cellspacing="3" cellpadding="2">
 <tr>
-	<td class="cela_titol">Num UF</td>
-	<td class="cela_titol">Nom UF</td>
+	<td class="cela_titol">UF</td>
+	<td class="cela_titol">Nom</td>
 	<td class="cela_titol">Crèdit</td>
 	<td class="cela_titol">Opcions</td>
+	<td class="cela_titol">Membres</td>
 </tr>
 <!--{foreach from=$ufs item=uf name=elsufs}-->
 <tr>
@@ -28,11 +29,19 @@
 	<!-- {if $membre.memuf != $uf.ufid} -->
 		<a href="?action=ingres&ufid={$uf.ufid}">[Ingressar]</a> 
 	<!-- {else} -->
-		<td>&nbsp;</td> 
 	<!-- {/if} -->
+	</td>
+	<td class='cela_generica'>
+	<!--{foreach from=$membres item=membreit name=membrename} -->
+	    <!-- {if $membreit.memuf == $uf.ufid } -->
+		<a href='membre.php?action=edit&memid={$membreit.memid}'>&nbsp;{$membreit.memnom}&nbsp;</a>
+	    <!-- {/if} -->
+	<!--{/foreach} -->
 	</td>
 </tr>
 <!--{/foreach}-->
 </table>
+<br>
+<input type="button" value="Afegir nou usuari" onclick="location.href='membre.php?action=add'">
 </body>
 </html>

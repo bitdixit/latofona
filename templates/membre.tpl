@@ -7,6 +7,19 @@
 </head>
 
 <body>
+
+{literal}
+<script>
+
+function confirmAndGo(msg,url)
+{
+	if(window.confirm(msg))
+		location.href = url;
+}
+
+</script>
+{/literal}
+
 {include file="menu.tpl"}
 <h1>Afegir/Modificar membre</h1>
 <br>
@@ -43,7 +56,12 @@
 			<tr><td>Telèfon</td><td><input type="text" name="memtel" value="{$memtel}"/></td></tr>
 			<tr><td>Correu electrònic</td><td><input type="text" name="mememail" value="{$mememail}"/></td></tr>
 			<tr><td>Informació adicional</td><td><input type="text" name="memextrainfo" value="{$memextrainfo}"/></td></tr>
-			<tr><td colspan="2"><input type="button" value="< Enrere" onclick="location.href='membre.php'"><input type="submit" value="Desar"/></td>
+			<tr><td colspan="2"><input type="button" value="< Enrere" onclick="location.href='uf.php'"><input type="submit" value="Desar"/>
+			<!--{if  $action == 'modify' }-->
+				<input type="button" value="Esborrar" onclick="confirmAndGo('Segur que vols esborrar aquest membre?','membre.php?memid={$memid}&action=delete');">
+			<!--{/if}-->
+
+</td>
 		</form>
 		<table>
 	</body>

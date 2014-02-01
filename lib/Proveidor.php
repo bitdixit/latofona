@@ -4,9 +4,9 @@ include_once("Log.php");
 
 Class Proveidor {
 	
-	function getAll($filter="") {
+	function getAll() {
 		global $db;
-		$sql = "select * from Proveidor".(($filter != "") ? " where ".$filter : "")." order by provnom";
+		$sql = "select * from Proveidor where provnom NOT LIKE '#%' order by provnom";
 		$db->SetFetchMode(ADODB_FETCH_ASSOC);
 		$rs = $db->GetAll($sql);
 		if ($rs === false) 

@@ -15,7 +15,7 @@ Class Informe {
 	*/
 	function getComandaFamiliasPerProveidor($data, $provid) {
 		global $db;
-		$sql = "select lcprod, prodid, prodnom, lcdata, lcquantitat, lcuf, ufid, ufname, prodprov, provnom from LiniaComanda, UnitatFamiliar, Producte, Proveidor where lcdata='$data' and ufid=lcuf and prodid=lcprod and provid=prodprov and provid=$provid order by ufid, prodid";
+		$sql = "select lcprod, prodid, prodnom, lcdata, lcquantitat, lcuf, ufid, ufname, prodprov, provnom from LiniaComanda, UnitatFamiliar, Producte, Proveidor where lcdata='$data' and ufid=lcuf and prodid=lcprod and provid=prodprov and provid=$provid AND prodnom NOT LIKE '#%' AND provnom NOT LIKE '#%' order by ufid, prodid";
 		return $db -> GetAll($sql);
 	}	
 	

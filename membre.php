@@ -19,9 +19,7 @@
 		if(isset($_REQUEST["memnom"]) && isset($_REQUEST["memlogin"]) && isset($_REQUEST["mempassword"]) && isset($_REQUEST["memuf"])) {
 			$newmemid = Membre::create($_REQUEST["memuf"], $_REQUEST["memnom"], $_REQUEST["memlogin"], $_REQUEST["mempassword"], $_REQUEST["memtipus"], $_REQUEST["memtel"], $_REQUEST["mememail"], $_REQUEST["memextrainfo"]);
 			if($newmemid) { 
-				$smartyObj -> assign("message","s'ha creat el membre  $_REQUEST[memlogin] ($_REQUEST[memnom]) en la unitat familiar ".$_REQUEST["memuf"]);
-				$smartyObj -> assign("membres", $membres = Membre::getAll("memlogin<>''"));		
-				$smartyObj -> display("membreadmin.tpl");
+				header('Location: uf.php');
 			}
 			else { 
 				$smartyObj -> assign("action", "create");
@@ -52,19 +50,7 @@
 			//edit user in db.
 			$res = Membre::modify($_REQUEST["memid"], $_REQUEST["memuf"], $_REQUEST["memnom"], $_REQUEST["memlogin"], $_REQUEST["mempassword"], $_REQUEST["memtipus"], $_REQUEST["memtel"], $_REQUEST["mememail"], $_REQUEST["memextrainfo"]);
 			if($res) {
-				$membre = $_SESSION["membre"];
-				if($membre["memid"] == $_REQUEST["memid"]) // editing the currently logged in user
-					$_SESSION["membre"] = $_REQUEST;
-
-				$smartyObj -> assign("memuf",$_REQUEST["uf"]);
-				$smartyObj -> assign("memnom",$_REQUEST["memnom"]);
-				$smartyObj -> assign("memlogin",$_REQUEST["memlogin"]);
-				$smartyObj -> assign("memtel",$_REQUEST["memtel"]);
-				$smartyObj -> assign("mememail",$_REQUEST["mememail"]);
-				$smartyObj -> assign("memextrainfo",$_REQUEST["memextrainfo"]);
-				$smartyObj -> assign("membres", $membres = Membre::getAll("memlogin<>''"));		
-				$smartyObj -> assign("message","s'ha modificat amb èxit l'usuari!");
-				$smartyObj -> display("membreadmin.tpl");
+				header('Location: uf.php');
 			}
 			else {
 				$smartyObj -> assign("ufs",UnitatFamiliar::getAll());
@@ -100,15 +86,10 @@
 			$smartyObj -> display("membre.tpl");
 		}
 	}
-	else { // present a menu of possible actions....
-		// edit currently logged in user...
-		// if tipus=1, edit any member..
-		if(isset($_SESSION["membre"])){
-			if($_SESSION["membre"]["memtipus"] == 1)  //only admin users...
-				$smartyObj -> assign("membres", $membres = Membre::getAll("memlogin<>''"));
-			
-			$smartyObj -> display("membreadmin.tpl");
-		}
+	else if ($_REQUEST["action"] == "delete")
+	{
+		Membre::delete($_REQUEST["memid"]);
+		header('location: uf.php');
 	}
 
 ?>

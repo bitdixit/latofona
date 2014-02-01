@@ -6,6 +6,20 @@
   <link href="css/taula.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+
+{literal}
+<script>
+
+function confirmAndGo(msg,url)
+{
+	if(window.confirm(msg))
+		location.href = url;
+}
+
+</script>
+{/literal}
+
+
 {include file="menu.tpl"}
 <h1>Gestiò membres</h1>
 <font color="blue">{$message}</font><br>
@@ -16,7 +30,8 @@
 	<tr>
 		<td class='cela_generica'>{$themembre.memuf}</td>
 		<td class='cela_generica'>{$themembre.memnom}</td>
-		<td class='cela_generica'><a href="?action=edit&memid={$themembre.memid}">[Editar]</a></td>
+		<td class='cela_generica'><a href="?action=edit&memid={$themembre.memid}">[Editar]</a>
+		<a href="#" onclick="confirmAndGo('Segur que vols esborrar aquest membre?','membre.php?memid={$themembre.memid}&action=delete');">[Esborrar]</a></td>
 	</tr>
 	<!--{/foreach} -->
 </table>

@@ -17,17 +17,6 @@ Class Membre {
 	var $mememail;
 	var $memextrainfo;
 	
-/*	function Membre($memid, $memuf, $memnom, $memlogin, $memtipus, $memtel, $mememail, $memextrainfo) {
-		$this -> memid = $memid;
-		$this -> memuf = $memuf;
-		$this -> memnom = $memnom;
-		$this -> memlogin = $memlogin;
-		$this -> memtipus = $memtipus;
-		$this -> memtel = $memtel;
-		$this -> mememail = $mememail;
-		$this -> memextrainfo = $memextrainfo;
-	}
-*/
 	function get($memid) {
 		global $db;
 		$sql = "select * from Membre where memid=$memid";
@@ -39,9 +28,9 @@ Class Membre {
 			return $rs->fields;			
 	}
 	
-	function getAll($filter="") {
+	function getAll() {
 		global $db;
-		$sql = "select * from Membre".(($filter != "") ? " where ".$filter : "")." order by memnom";
+		$sql = "select * from Membre where memlogin NOT LIKE '#%' order by memnom";
 		$db->SetFetchMode(ADODB_FETCH_ASSOC);
 		$rs = $db->Execute($sql);
 		if ($rs === false) 
@@ -61,13 +50,9 @@ Class Membre {
 		global $db;
 		$sql = "select * from Membre where memlogin='$login' and mempassword='".crypt($password,"ax")."'";
 		$rs = $db->Execute($sql);
-		//$result = $db->GetAll($strSQL) or die("Error en la sentencia SQL: $strSQL<br/>".$db->ErrorMsg());
 		if ($rs) {
 			if (!$rs -> EOF) {
 				return $rs->fields;
-				/*
-				new Membre($rs->fields['memid'],$rs->fields['memuf'],$rs->fields['memnom'],$rs->fields['memlogin'],$rs->fields['memtipus'],$rs->fields['memtel'],$rs->fields['mememail'],$rs->fields['memextrainfo']);
-				*/
 			}
 		}
 		else return false;
@@ -94,6 +79,17 @@ Class Membre {
 		Log::AddLogGeneral("Modificat membre ".$memlogin." ".$memnom." UF".$memuf);
 		return $db->CompleteTrans();
 		  
+	}
+	function delete($memid)
+	{
+		Seguretat::AssertAdministrator();		
+		global $db;
+		$membre = Membre::get($memid);
+		$sql = "update Membre set memlogin=CONCAT('#',memlogin) where memid=$memid";
+		$db -> StartTrans();		
+		$db->Execute($sql); 
+		Log::AddLogGeneral("Esborrat membre ".$membre['memlogin']." ".$membre['memnom']." UF".$membre['$memuf']);
+		return $db->CompleteTrans();
 	}
 }
 ?>

@@ -2,6 +2,7 @@
 
 include_once('capcelera_segura.php');
 include_once('UnitatFamiliar.php');
+include_once('Membre.php');
 
 $smartyObj = new Smarty;
 $smartyObj -> assign("tipus_usuari",$_SESSION["membre"]["memtipus"]);
@@ -47,6 +48,7 @@ else if (($_REQUEST["action"] == "add")) {
 }
 else { // show list of all ufs..
 	$smartyObj -> assign("ufs",UnitatFamiliar::getAll());
+	$smartyObj -> assign("membres",Membre::getAll());
 	$smartyObj -> display("uflist.tpl");
 }
 

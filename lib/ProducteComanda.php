@@ -5,17 +5,15 @@ Class ProducteComanda {
 
 	function llistatProductesMarcats ($strData)
 	{
-		// add where stock=0
-		$strSQL = "select p.prodid, p.prodnom,p.prodpreu,if(ifnull(pc.pcprodid,0)=0,'','checked') as checked, pr.provnom, p.prodisstock from Producte p left join ProducteComanda pc on (p.prodid = pc.pcprodid and  pc.pcdata = '".conv_apos($strData)."') left join Proveidor pr on (pr.provid = p.prodprov) where p.prodisstock <= 0 order by p.prodprov,p.prodnom";
+		$strSQL = "select p.prodid, p.prodnom,p.prodpreu,if(ifnull(pc.pcprodid,0)=0,'','checked') as checked, pr.provnom, p.prodisstock from Producte p left join ProducteComanda pc on (p.prodid = pc.pcprodid and  pc.pcdata = '".conv_apos($strData)."') left join Proveidor pr on (pr.provid = p.prodprov) where p.prodnom not like '#%' and pr.provnom not like '#%' and p.prodisstock <= 0 order by p.prodprov,p.prodnom";
+		echo $sqlSQL;
 		global $db;
-// 		$db->debug = true;
-		//$result = $db->Execute($strSQL);
 		$result = $db->GetAll($strSQL) or die("Error en la sentencia SQL: $strSQL<br/>".$db->ErrorMsg());
 		return $result;
 	}
 	function llistatProductesMarcatsProveidor ($strData,$provid)
 	{
-		$strSQL = "select p.prodid, p.prodnom,p.prodpreu,if(ifnull(pc.pcprodid,0)=0,'','checked') as checked, pr.provnom, p.prodisstock from Producte p left join ProducteComanda pc on (p.prodid = pc.pcprodid and  pc.pcdata = '".conv_apos($strData)."') left join Proveidor pr on (pr.provid = p.prodprov) where p.prodisstock <= 0 and pr.provid=".$provid." order by p.prodprov,p.prodnom";
+		$strSQL = "select p.prodid, p.prodnom,p.prodpreu,if(ifnull(pc.pcprodid,0)=0,'','checked') as checked, pr.provnom, p.prodisstock from Producte p left join ProducteComanda pc on (p.prodid = pc.pcprodid and  pc.pcdata = '".conv_apos($strData)."') left join Proveidor pr on (pr.provid = p.prodprov) where p.prodnom not like '#%' and pr.provnom not like '#%' and p.prodisstock <= 0 and pr.provid=".$provid." order by p.prodprov,p.prodnom";
 		global $db;
 		$result = $db->GetAll($strSQL);
 		if ($result===FALSE) $result=Array();

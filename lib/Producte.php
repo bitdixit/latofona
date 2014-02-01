@@ -3,17 +3,19 @@
 Class Producte {
 	
 	function llistatProductes () {
-		$strSQL = "SELECT * from Producte p right join Proveidor pr on (p.prodprov = pr.provid) order by pr.provnom, p.prodnom";
+		$strSQL = "SELECT * from Producte p right join Proveidor pr on (p.prodprov = pr.provid) WHERE p.prodnom NOT LIKE '#%' AND pr.provnom NOT LIKE '#%' order by pr.provnom, p.prodnom";
 		global $db;
-		//$result = $db->Execute($strSQL);
 		$result = $db->GetAll($strSQL) or die("Error en la sentencia SQL: $strSQL<br/>".$db->ErrorMsg());
 		return $result;
 	
 	}
 	function llistatProductesProveidor ($provid) {
-		$strSQL = "SELECT * from Producte p right join Proveidor pr on (p.prodprov = pr.provid) WHERE pr.provid=".$provid." order by pr.provnom, p.prodnom";
+		$strSQL = "SELECT * FROM Producte p RIGHT JOIN Proveidor pr ON (p.prodprov = pr.provid) WHERE prodnom NOT LIKE '#%' AND pr.provnom NOT LIKE '#%' AND pr.provid=".$provid." ORDER BY pr.provnom, p.prodnom";
 		global $db;
-		$result = $db->GetAll($strSQL) or die("Error en la sentencia SQL: $strSQL<br/>".$db->ErrorMsg());
+		$result = $db->GetAll($strSQL);
+		//if (PEAR::isError($result)) {
+		//    die($result->getMessage());
+		//}		
 		return $result;
 	
 	}
@@ -76,21 +78,20 @@ Class Producte {
 		global $db;
 		$db -> StartTrans();
 		
-		// get current price of the product..
 		$prod = Producte::get($prodid);
-		//add to stock input first...
-		$sql = "insert into StockInput values (NOW(), $prodid, $prod[prodpreu],".sql_float($stocktoadd).", $memid)";
-		$db -> Execute($sql);
 		
-		//add to the current stock....
 		$sql = "update Producte set prodstockactual=prodstockactual+$stocktoadd where prodid=$prodid";
 		$db -> Execute($sql);
+		
+		if ($stocktoadd>=0) $stocktoadd = "+".$stocktoadd;
+		Log::AddLogProveidor("Modificat stock (".$stocktoadd.") producte ".$prodid." ".$prod['prodnom'],  $prod['prodprov']);	
+
 		return $db -> CompleteTrans();
 	}
 	
 	function remove ($prodid) {
 		global $db;
-		$sql = "delete from Producte where prodid=$prodid";
+		$sql = "UPDATE Producte SET prodnom=CONCAT('#',prodnom) WHERE prodid=$prodid";
 		$res = $db->Execute($sql);
 		if($res === false)
 			return false;

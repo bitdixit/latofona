@@ -79,9 +79,11 @@ function commaReplace(orig) {
 			<tr><td>Estoc màxim</td><td><input type="text" name="prodstockmax" value="{$prodstockmax}" size="10"/></td></tr>
 			<tr><td>Estoc actual</td><td>
 				<!-- {if $action == 'modify'} -->
-				 (Per afegir estoc, torna a la pàgina anterior. Ajusta l'estoc aquí només quan sigui necessari...)<br/>
-				<!-- {/if} -->
+				<input type="text" name="prodstockactual" value="{$prodstockactual}" size="10" disabled />
+				Per canviar estoc, torna a la pàgina anterior ( pots afegir stock negatiu )<br/>
+				<!-- {else} -->
 				<input type="text" name="prodstockactual" value="{$prodstockactual}" size="10"/>
+				<!-- {/if} -->
 			</td></tr>
 			<tr><td colspan="2"><input type="button" value="< Enrere" onclick="window.history.back()"><input type="submit" value="Desar"/></td>
 		</form>
