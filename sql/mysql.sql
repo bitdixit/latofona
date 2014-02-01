@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Temps de generació: 01-02-2014 a les 02:13:10
+-- Temps de generació: 01-02-2014 a les 15:47:18
 -- Versió del servidor: 5.1.66
 -- Versió de PHP : 5.3.3-7+squeeze16
 
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `LiniaComanda` (
   KEY `users` (`lcuf`),
   KEY `data` (`lcdata`),
   KEY `lcprod` (`lcprod`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=444796 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=444870 ;
 
 -- --------------------------------------------------------
 
@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `Log` (
   `lgwhatobjid` int(11) NOT NULL,
   `lgwhatobjty` enum('UF','PROV','GENERAL') NOT NULL,
   PRIMARY KEY (`lgid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=69 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=213 ;
 
 -- --------------------------------------------------------
 
@@ -104,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `Membre` (
   `memextrainfo` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`memid`),
   KEY `memuf` (`memuf`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=166 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=168 ;
 
 -- --------------------------------------------------------
 
@@ -126,20 +126,7 @@ CREATE TABLE IF NOT EXISTS `Producte` (
   `prodstockmax` int(11) DEFAULT '0',
   `prodstockactual` float(10,2) DEFAULT '0.00',
   PRIMARY KEY (`prodid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1367 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de la taula `ProducteCategoria`
---
-
-CREATE TABLE IF NOT EXISTS `ProducteCategoria` (
-  `pcid` int(11) NOT NULL AUTO_INCREMENT,
-  `pcnom` varchar(255) NOT NULL DEFAULT '',
-  `pcparentpc` int(11) DEFAULT NULL,
-  PRIMARY KEY (`pcid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1370 ;
 
 -- --------------------------------------------------------
 
@@ -181,22 +168,7 @@ CREATE TABLE IF NOT EXISTS `Proveidor` (
   `provresponsable` varchar(255) DEFAULT NULL,
   `provtelefonresponsable` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`provid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=93 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de la taula `StockInput`
---
-
-CREATE TABLE IF NOT EXISTS `StockInput` (
-  `stidata` date NOT NULL DEFAULT '0000-00-00',
-  `stiprod` int(11) NOT NULL DEFAULT '0',
-  `stipreu` float(10,2) NOT NULL DEFAULT '0.00',
-  `stiquantitat` float(10,2) NOT NULL DEFAULT '0.00',
-  `stimem` int(11) NOT NULL DEFAULT '0',
-  KEY `stidata` (`stidata`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Stock input table.  Does not maintain current stock.';
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=95 ;
 
 -- --------------------------------------------------------
 
@@ -227,4 +199,4 @@ CREATE TABLE IF NOT EXISTS `Venda` (
   `vensubtotal` float(10,2) NOT NULL DEFAULT '0.00',
   `venafegit` float(10,2) NOT NULL DEFAULT '0.00',
   PRIMARY KEY (`venid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9418 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9427 ;
