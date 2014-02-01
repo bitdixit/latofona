@@ -1,11 +1,5 @@
 {literal}
 <script>
-	function confirmExit() {
-		var ret = confirm (" Si surts ara perds totes les dades introduïdes.\n Per gravar els canvis has d'apretar el botó de VALIDAR. \n Segur que vols sortir?!?!?!? ");
-
-		if (ret)
-			window.location = "login.php?accio=logout";
-	}
 
 // Copyright 2006-2007 javascript-array.com
 
@@ -49,9 +43,6 @@ function mcancelclosetime()
 	}
 }
 
-// close layer when click-out
-document.onclick = mclose; 
-
 </script>
 {/literal}
 
@@ -90,7 +81,8 @@ Has entrat com <b>{$membre.memnom}</b>
             onmouseover="mcancelclosetime()" 
             onmouseout="mclosetime()">
         <a href="proveidor.php">Gestio Proveïdors/Productes</a>
-        <a href="uf.php">Gestio UF/Membres</a>
+        <a href="membre.php">Gestio Membres</a>
+        <a href="uf.php">Gestio Cistelles (UFs)</a>
 
         </div>
     </li>
