@@ -24,8 +24,8 @@ function confirmAndGo(msg,url)
 <!--{if $stockedit !='true'} -->
 	<h1>Gestiò de productes {$provnom}</h1>
 <!--{else} -->
-	<h1>Afegir stock</h1>
-	Actualitza els preus <b>ABANS</b> d'afegir estoc.
+	<h1>Afegir stock {$provnom}</h1>
+	<h4>Pots posar stock negatiu per ajustar l'actual</h4>
 <!--{/if}-->
 <font color="blue">{$message}</font>  
 <br>
@@ -78,7 +78,7 @@ function confirmAndGo(msg,url)
 <!--{else}-->
 <br>
 <input type="button" onclick="location.href='proveidor.php'" value="< Enrere">
-<input type="button" onclick="location.href='producte.php?action=editall&stockedit=true&provid={$provid}'" value="Afegir stocks (Actualitza els preus abans)">
+<input type="button" onclick="location.href='producte.php?action=editall&stockedit=true&provid={$provid}'" value="Afegir stocks">
 <input type="button" onclick="location.href='?action=add&provid={$provid}'" value="Afegir nou producte">
 <!--{/if}-->
 </form>
