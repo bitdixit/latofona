@@ -33,7 +33,10 @@ Class Log
 		$ufrow = UnitatFamiliar::get($logged["memuf"]);
 		$lgwho = $ufrow["ufname"]." (".$logged["memnom"].")";
 		$lgwhoufid = $logged["memuf"];
-				 
+	
+                $lgwhat=str_replace("'","`",$lgwhat);
+		$lgwhatobj=str_replace("'","`",$lgwhatobj);
+
 		$sql = "insert into Log (lgdate, lgwho, lgwhoufid, lgwhat, lgwhatobj,lgwhatobjid,lgwhatobjty) ".
 			"VALUES (NOW(), '$lgwho', $lgwhoufid, '$lgwhat', '$lgwhatobj',$lgwhatobjid,'$lgwhatobjty')";
 
