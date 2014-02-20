@@ -64,10 +64,9 @@ Class Producte {
 		if($prodiva=="") $prodiva = "0";
 		$sql = "update Producte set prodprov=$prodprov, prodnom='".conv_apos($prodnom)."', prodcode='$prodcode',prodpreuinicial=".sql_float($prodpreuinicial).", prodiva=".sql_float($prodiva).", prodpreu=".sql_float($prodpreu).", prodisstock=$prodisstock,"; 
 		(($prodstockmin != "") ? ($sql .= "prodstockmin=".$prodstockmin.",") : ($sql .= "prodstockmin=NULL,")) ; 
-		(($prodstockmax != "") ? ($sql .= "prodstockmax=".$prodstockmax.",") : ($sql .= "prodstockmax=NULL,")) ; 
-		(($prodstockactual != "") ? ($sql .= "prodstockactual=".sql_float($prodstockactual)) : ($sql .= "prodstockactual=0")) ; 
+		(($prodstockmax != "") ? ($sql .= "prodstockmax=".$prodstockmax) : ($sql .= "prodstockmax=NULL")) ; 
+		//(($prodstockactual != "") ? ($sql .= "prodstockactual=".sql_float($prodstockactual)) : ($sql .= "prodstockactual=0")) ; 
 		$sql .= " where prodid=$prodid";
-
 		$db -> StartTrans();
 		$db -> Execute($sql);
 		Log::AddLogProveidor("Modificat producte ".$prodid." ".$prodnom,  $prodprov);	
