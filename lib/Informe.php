@@ -35,6 +35,18 @@ Class Informe {
 		$sql = "select * from venda where venuf=$uf";
 		return $db -> GetAll($sql);
 	}
+
+        function operacionsPerCistella($data,$date_start,$date_end) {
+                global $db;
+
+                $sql="SELECT ufid as UF, ufname as Nom, "
+                ."(SELECT SUM(inquantitat) FROM Ingres WHERE inuf=ufid AND indata BETWEEN '$date_start' AND '$date_end') AS 'Ingressos realitzats',"
+                ."(SELECT SUM(vensubtotal) FROM Venda WHERE venuf=ufid AND vendata BETWEEN '$date_start' AND '$date_end') AS 'Vendes realitzades',"
+                ."(SELECT SUM(lcquantitat*lcpreuunitat) FROM LiniaComanda WHERE lcuf=ufid AND lcvenda=0 AND lcdata BETWEEN '$date_start' AND '$date_end') AS 'Vendes pendents'"
+
+                ." FROM `UnitatFamiliar`"; 
+                return $db -> GetAll($sql);
+        }
 }
 
 ?>

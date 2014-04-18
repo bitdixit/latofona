@@ -28,7 +28,7 @@ Class Proveidor {
 	}
 
 	function add($provArray) {
-		Seguretat::AssertAdministrator();
+		Seguretat::AssertGestorProductes();
 		global $db;
 		$sql = "insert into Proveidor values(NULL, '$provArray[provnom]', '$provArray[provtelefon]', '$provArray[provfax]', '$provArray[provextrainfo]', '$provArray[provresponsable]', '$provArray[provtelefonresponsable]')";
 		$db -> StartTrans();
@@ -38,6 +38,7 @@ Class Proveidor {
 	}
 
 	function modify($provid, $provnom, $provtelefon, $provfax, $provextrainfo, $provresponsable, $provtelefonresponsable) {
+                Seguretat::AssertGestorProductes();
 		global $db;
 		$sql = "update Proveidor set provnom='$provnom', provtelefon='$provtelefon', provfax='$provfax', provextrainfo='$provextrainfo', provresponsable='$provresponsable', provtelefonresponsable='$provtelefonresponsable' where provid=$provid";
 		$db -> StartTrans();

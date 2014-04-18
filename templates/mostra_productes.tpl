@@ -33,7 +33,7 @@ function allSelectProveidor(truefalse, proveidor) {
 
 <!-- {if !$productes} -->
 
-<h4>No hi han productes dels que es pugui demanar comanda</h4>
+<h4>Aquest proveidor no te productes dels que es pugui demanar comanda</h4>
 <br>
 <input type="button" onclick="location.href='proveidor.php'" value="< Enrere"/>
 

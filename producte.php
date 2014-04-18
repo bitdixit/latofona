@@ -15,7 +15,6 @@
 	$smartyObj -> assign("provid", $provid );
 
 
-	if($_SESSION["membre"]["memtipus"] == 1) {
 		if($_REQUEST["action"] == "add"){
 			$smartyObj -> assign("action", "create");
 			$smartyObj -> assign("provs",Proveidor::getAll());
@@ -141,5 +140,4 @@
 					$smartyObj -> assign("stockedit", "true");
 				$smartyObj -> display("producteseditar.tpl");
 		}
-	}
 ?>

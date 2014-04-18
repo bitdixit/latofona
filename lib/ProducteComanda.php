@@ -24,12 +24,9 @@ Class ProducteComanda {
 	}
 	
 	function insertarProductesAComanda($provid,$idProductes, $strData) {
-	/*El mateix que un pero $idProductes és un Array*/
+        Seguretat::AssertGestorProductes();
 		global $db;
 		$db -> StartTrans();
-		//$db->debug = true;
-		/* Aquí hauria de començar una transacció*/
-		/* Borrem tots els productes d'aquell dia */
 		$strSQL = "DELETE FROM ProducteComanda WHERE pcdata = '".conv_apos($strData)."' AND pcprodid in (SELECT prodid FROM Producte WHERE prodprov=".$provid.")";
 		$recordSet = $db->Execute($strSQL);
 		$recordSet -> Close();

@@ -54,6 +54,19 @@
 			$rows = Venda::getListByDia($_REQUEST["data"]);
 			$smartyObj -> assign("multidata","true");
 		}
+                elseif($informe == "resumtorn") {
+                        $week_start = new DateTime();
+                        $week_start->setISODate(date("Y", strtotime($data)),date("W", strtotime($data)));
+                        $date_start = $week_start->format('Y-m-d');
+                        $week_start->add(new DateInterval('P6D'));
+                        $date_end = $week_start->format('Y-m-d');
+                        
+                        $smartyObj -> assign("title1","Resum torn  $date_start al $date_end");
+                        $rows = Informe::operacionsPerCistella($_REQUEST["data"],$date_start,$date_end);
+                        $smartyObj -> assign("multidata","false");
+                }
+
+
 		elseif($informe == "vendesdiadetall") {
 			$smartyObj -> assign("title1","Detall venda del dia $data");
 			$products = LiniaComanda::llistatProductesVenda($_REQUEST["venid"]);

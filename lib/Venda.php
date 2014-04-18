@@ -5,10 +5,9 @@ class Venda {
 	function checkOut($uf, $data)
 	{
 		Seguretat::AssertPaymentPC();
-		if($_SESSION["membre"]["memid"] < 1)
-			return false;
-		else 
-			$currmembre = $_SESSION["membre"]["memid"];
+                Seguretat::AssertGestorProductes();   
+		$currmembre = $_SESSION["membre"]["memid"];
+                
 		global $db; 
 // 		$db -> debug = true;
 		// calculate total.
@@ -44,7 +43,7 @@ class Venda {
 		$total = $subtotal + $venafegit;
 		
 		$ufrow = UnitatFamiliar::get($uf);
-		$notalog = "VENDA ".$total."€ (SALDO ".$ufrow["ufval"]."->".($ufrow["ufval"]-$total).")";		
+		$notalog = "VENDA ".$total."eur (SALDO ".$ufrow["ufval"]."->".($ufrow["ufval"]-$total).")";		
 		Log::AddLogUF($notalog,$uf);
 
 		// discount total from ufval

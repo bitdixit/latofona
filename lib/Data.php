@@ -3,12 +3,16 @@
 include_once("Log.php");
 
 Class Data {
-	
-	function comandaActual () {
+
+        const FERVENDA=1;
+        const COBRARVENDA=2;
+        const FERCOMANDA=4;
+
+	function comandaActual() {
 		$strRetorn = "";
 		
 		//first, try something in the last few days or in the next few days.  assuming week is monday-saturday.
-		$strSQL = "SELECT datdata FROM Data where datestat = 1 and datdata < adddate(CURRENT_DATE, INTERVAL 3 DAY) and datdata >= adddate(CURRENT_DATE, INTERVAL -4 DAY) order by datdata asc limit 1";
+		$strSQL = "SELECT datdata FROM Data where datdata < adddate(CURRENT_DATE, INTERVAL 3 DAY) and datdata >= adddate(CURRENT_DATE, INTERVAL -4 DAY) order by datdata asc limit 1";
 		global $db;
 // 		$db -> debug = true;
 		$recordSet = $db->GetAll($strSQL);
@@ -43,8 +47,8 @@ Class Data {
 	function comandaSeguent ($strData) {
 		$strRetorn = "";
 		$strSQL = "SELECT datdata FROM Data where datdata > '".conv_apos($strData)."'order by datdata asc limit 1";
-		global $db;
-		$recordSet = $db->GetAll($strSQL);
+                global $db;
+                $recordSet = $db->GetAll($strSQL);
 		return $recordSet[0]["datdata"];	
 	}
 	
@@ -70,35 +74,63 @@ Class Data {
 		global $db;
 // 		$db -> debug = true;
 		Log::AddLogGeneral("Afegida data $year-$month-$day");
-		$sql = "insert into Data (datdata, datestat) values ('$year-$month-$day', 1)";
+		$sql = "insert into Data (datdata, datestat) values ('$year-$month-$day', 0)";
 		$db->Execute($sql);
 	}
 	
 	function getAll($filter="") {
 		global $db;
-// 		$db -> debug = true;
 		$sql = "select * from Data".(($filter == "") ? "" : " where ".$filter);
 		return $db->GetAll($sql);		
 	}
+
+        function get($data)
+        {
+                global $db;
+                $sql = "select * from Data  where datdata='".$data."'";
+                $all=$db->GetAll($sql);
+                return $all[0];
+        }
+
+        function canviarEstat($data, $tipus, $estat)
+        {
+                Seguretat::AssertAdministrator();
+                global $db;
+                $recordSet = $db->GetAll("select * from Data where datdata='".$data."'");
+                $estatactual = $recordSet[0]["datestat"];
+                if ($estat==TRUE)
+                  $estatactual = $estatactual | $tipus;
+                else
+                  $estatactual = $estatactual & ~$tipus;
+                
+                $sql = "update Data set datestat=".$estatactual." where datdata='".$data."'";
+                $db->Execute($sql);
+
+                Log::AddLogGeneral("Canviat estat data $data a estat $estatactual");
+        }
 	
-	function getBestDateForComanda() {
-		if ((isset($_REQUEST['data'])) && ($_REQUEST['data'] != "")) {
-			$strData = $_REQUEST['data'];
-		} else {
-			$actual  = Data::comandaActual();
-			if ($_SESSION["debug"]) echo "Data Actual: $actual <br/>";
-			$strData = Data::comandaSeguent($actual);
-			if ($_SESSION["debug"]) echo "Data Seguent: $strData <br/>";
-		}
-		
-		return $strData;		
+	function getBestDateForComanda()
+        {
+               global $db;
+               $sql = "select datdata from Data where datestat & 4 > 0 order by datdata asc limit 1";
+               $recordSet = $db->GetAll($sql);
+               return $recordSet[0]["datdata"];
 	}
 	
 	function getLastDayActiveComanda() {
 		global $db;
-		$sql = "select datdata from Data where datestat=1 order by datdata desc limit 1";
+		$sql = "select datdata from Data where datestat & 4 > 0 order by datdata asc limit 1";
 		$recordSet = $db->GetAll($sql);
 		return $recordSet[0]["datdata"];
 	}
+
+        function getLastDayComanda() {
+                global $db;
+                $sql = "select datdata from Data order by datdata desc limit 1";
+                $recordSet = $db->GetAll($sql);
+                return $recordSet[0]["datdata"];
+        }
+
+
 }
 ?>

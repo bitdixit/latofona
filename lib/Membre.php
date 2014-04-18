@@ -28,10 +28,10 @@ Class Membre {
 			return $rs->fields;			
 	}
 	
-	function getAll() {
+	function getAll($filter="1=1") {
 		global $db;
-		$sql = "select * from Membre where memlogin NOT LIKE '#%' order by memnom";
-		$db->SetFetchMode(ADODB_FETCH_ASSOC);
+		$sql = "select * from Membre where ".$filter." and memlogin NOT LIKE '#%' order by memnom";
+                $db->SetFetchMode(ADODB_FETCH_ASSOC);
 		$rs = $db->Execute($sql);
 		if ($rs === false) 
 			return false; 

@@ -11,9 +11,14 @@
 	$smartyObj -> assign("uflog",$_SESSION["membre"]["memuf"]);
 
 	$data = get_current_date();
-//	echo "*************************".$data;
 	
 	if(($_REQUEST["accio"] == "checkout") && isset($_REQUEST["uf"]) && isset($_REQUEST["data"])) { //cobrar el client. tanca la venda.
+
+                $datarow=Data::get($_REQUEST["data"]);
+                echo "datestat".$datarow["datestat"];
+                if (($datarow["datestat"] & Data::COBRARVENDA) == 0)
+                   error("La data ".$data." no esta marcada per poder cobrar vendes");
+
 
 		// check to see if they're adding money to their account as well...
 		if(trim($_REQUEST["inquantitat"]) != "") {
@@ -53,8 +58,9 @@
 			$subtotal += $product[2] * $product[3]; // preu * quantitat
  		}
 		
-		global $caixaIP;
-		if($caixaIP != "" && stristr($caixaIP,$_SERVER["REMOTE_ADDR"]))
+		global $masterUF;
+		
+                if(Seguretat::isPaymentPC())
 			$goodip = "true";
 		else
 			$goodip = "false"; 
@@ -87,14 +93,24 @@
 		$smartyObj -> assign("confirm_exit","true");
 		$smartyObj -> assign("uf",$_REQUEST["uf"]);
 		$smartyObj -> display("llista_productes_uf.tpl");
-	}	
+	}
+        else if (isset($_REQUEST["uf"]))
+        {
+                // la meva venda 
+                $dates = Data::getAll("datestat & ".Data::FERVENDA." !=0");
+                if (count($dates)==0) error("No hi ha cap data de venda activada.");
+                else if (count($dates)>1) error("Hi ha mes d'una data de venda activada.");
+                header( 'Location: vendes.php?uf='.$_SESSION["membre"]["memuf"]."&data=".$dates[0]["datdata"] ) ;
+        }	
 	else {
-	   //<dunetna> Afegim la unitat familiar al template
+                $dates = Data::getAll("datestat & ".Data::COBRARVENDA." !=0");
+                if (count($dates)==0) error("No hi ha cap data de venda activada.");
+                else if (count($dates)>1) error("Hi ha mes d'una data de venda activada.");
+   
 		$smartyObj -> assign("uflog",$_SESSION["membre"]["memuf"]);
-		//</dunetna>
-		$smartyObj -> assign("ufs", UnitatFamiliar::getAll());
-		$smartyObj -> assign("dates",Data::getAll("1=1 order by datdata desc"));
-		$smartyObj -> assign("datavenda",Data::comandaActual());
+		$smartyObj -> assign("ufs", UnitatFamiliar::getAll("ufid!=".$_SESSION["membre"]["memuf"]));
+		$smartyObj -> assign("dates",Data::getAll("datdata='".$dates[0]["datdata"]." order by datdata desc"));
+		$smartyObj -> assign("datavenda",$dates[0]["datdata"]);
 		$smartyObj -> display("vendes_options.tpl");
 	}
 ?>

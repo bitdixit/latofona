@@ -22,9 +22,6 @@ Algú d'una altra unitat familiar t'ha de vendre.</h4>
 	</select>
 	<select name="data">
 		<option value="{$datavenda}">{$datavenda}</option>
-<!--{foreach from=$dates item=data name=ladata}-->
-		<option value="{$data.datdata}">{$data.datdata}</option>
-<!--{/foreach}-->
 	</select>
 <br><br/>
 	<input type="submit" value="Vendre a aquesta UF >"/>

@@ -86,7 +86,6 @@
 </tr>
 </table>  
 <br><br>
-	<!--{if $uf != $membre.memuf}-->
 		<!--{if $goodip == 'true'} -->
 			<b>Afegir crèdit<b><br/>
 			<table border=0> 
@@ -98,14 +97,11 @@
 		    <br/><br/>
 			<input type="hidden" name="accio" value="{$action}"/>
 			<input type="button" value="< Modificar venda" onclick='location.href="vendes.php?uf={$uf}&data={$dia}"'>&nbsp;
-			<input type="submit" value="Finalitzar venda>"/>
+			<input type="submit" value="Cobrar la venda>"/>
 			</form>
 		<!--{else} -->
-			<b>NO ET POTS COBRAR/COMPRAR DES D'AQUEST ORDINADOR<br>La compra ha estat gravada però encara no s'ha cobrat.<br>Passa per caixa si us plau.</b>
+			<b>VENDA CONFIRMADA. EL SEGON TORN S'ENCARREGARA DE COBRAR LA VENDA MES ENDAVANT</b>
 		<!-- {/if}-->
-	<!--{else} -->
-		<b>NO ET POTS VENDRE A TU MATEIX!!!!!<br>La teva compra ha estat gravada però encara no s'ha cobrat.<br>Passa per caixa si us plau.</b>
-	<!--{/if} -->
 	<!--{/if}-->	
 <!--{else}-->
 Pel dia {$dia}, encara no hi ha productes sel.leccionats.

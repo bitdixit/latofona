@@ -10,7 +10,7 @@
 		if($membre){
 			$_SESSION["membre"] = $membre;
 			Log::AddLogUF("Login",$membre["memuf"]);
-			header("Location: novetats.php");
+			header("Location: inici.php");
 		}	
 		else {	
 			$smartyObj -> display("login.tpl");

@@ -38,6 +38,7 @@ Class UnitatFamiliar {
 	{
 		if ($quantitat==0) return true;
  
+                Seguretat::AssertAdministrator();
 		Seguretat::AssertPaymentPC();
 		
 		global $db;

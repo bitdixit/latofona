@@ -46,6 +46,7 @@ Class Producte {
 	}
 	
 	function create ($prodprov, $prodnom, $prodcode, $prodpreuinicial, $prodiva, $prodpreu, $prodisstock, $prodstockmin, $prodstockmax, $prodstockactual) {
+                Seguretat::AssertGestorProductes();
 		global $db;
 		if($prodiva=="") $prodiva = 0;
 		$sql = "insert into Producte (prodid, prodnom, prodcode, prodprov, prodpreuinicial, prodiva, prodpreu, prodisstock, prodstockmin, prodstockmax, prodstockactual) values (NULL, '".conv_apos($prodnom)."', '$prodcode', $prodprov,".sql_float($prodpreuinicial).",".sql_float($prodiva).",".sql_float($prodpreu).", $prodisstock, ";
@@ -60,7 +61,8 @@ Class Producte {
 	}
 	
 	function modify ($prodid, $prodprov, $prodnom, $prodcode, $prodpreuinicial, $prodiva, $prodpreu, $prodisstock, $prodstockmin, $prodstockmax, $prodstockactual) {
-		global $db;
+		Seguretat::AssertGestorProductes();
+                global $db;
 		if($prodiva=="") $prodiva = "0";
 		$sql = "update Producte set prodprov=$prodprov, prodnom='".conv_apos($prodnom)."', prodcode='$prodcode',prodpreuinicial=".sql_float($prodpreuinicial).", prodiva=".sql_float($prodiva).", prodpreu=".sql_float($prodpreu).", prodisstock=$prodisstock,"; 
 		(($prodstockmin != "") ? ($sql .= "prodstockmin=".$prodstockmin.",") : ($sql .= "prodstockmin=NULL,")) ; 
@@ -74,7 +76,8 @@ Class Producte {
 	}
 	
 	function addStock($prodid, $stocktoadd, $memid) {
-		global $db;
+		Seguretat::AssertGestorProductes();
+                global $db;
 		$db -> StartTrans();
 		
 		$prod = Producte::get($prodid);
@@ -89,6 +92,7 @@ Class Producte {
 	}
 	
 	function remove ($prodid) {
+                Seguretat::AssertGestorProductes();
 		global $db;
 		$sql = "UPDATE Producte SET prodnom=CONCAT('#',prodnom) WHERE prodid=$prodid";
 		$res = $db->Execute($sql);

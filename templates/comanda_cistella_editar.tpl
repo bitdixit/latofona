@@ -77,9 +77,6 @@ function posarEnBlanc(obj){
 {include file="menu.tpl"}
 <br>
 <h1>Editar comanda <b>pel dia {$dia}<br>Unitat Familiar {$uf}</h1><br/>
-<!--{if $datalast != ''} --> <input type="button" value="< Comanda anterior {$datalast}" onclick="location.href='comanda_cistella.php?data={$datalast}'" >  <!--{/if} -->
-<!--{if $datanext != ''} --> <input type="button" value="Comanda següent {$datanext} >" onclick="location.href='comanda_cistella.php?data={$datanext}'" ><!--{/if} --> 
-<br>
 
 <!--{if count($productes) > 0 }-->
 

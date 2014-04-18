@@ -8,19 +8,18 @@
 	$smartyObj -> assign("membre", $_SESSION["membre"]);
 	
 	if(!isset($_REQUEST["data"]) || $_REQUEST["data"] == "") {
-		$data = Data::comandaSeguent(Data::comandaActual()); //getting next week's stuff....
-		if($data == "") $data = Data::comandaActual();
+		$data = Data::comandaActual();
 	}
 	else 
 		$data = $_REQUEST["data"];
-		
+
 	if(isset($_REQUEST["data_direccio"])) {
 		if($_REQUEST["data_direccio"] == "1")
 			$data = Data::comandaAnterior($data);
 		else if($_REQUEST["data_direccio"] == "2")
 			$data = Data::comandaSeguent($data);
 	}
-	
+
 	$smartyObj -> assign("dia", $data);
 	$smartyObj -> assign("tipus_usuari",$_SESSION["membre"]["memtipus"]);
 	
