@@ -101,7 +101,7 @@
 		}
 
 		elseif($informe == "consumprov") {
-			$proveidor = Proveidor::getById($_REQUEST["provid"]);
+/*			$proveidor = Proveidor::getById($_REQUEST["provid"]);
 			$inici = $_REQUEST["inici"];
 			$fi = $_REQUEST["fi"];
 			$provid = $_REQUEST["provid"];
@@ -111,8 +111,40 @@
 			if ($rows==FALSE) $rows=Array();
 			$smartyObj -> assign("multidata","true");
 		}		
-		
-		
+
+               elseif($informe == "consumprov1") {
+*/                        $proveidor = Proveidor::getById($_REQUEST["provid"]);
+                        $any = $_REQUEST["any"];
+                        $provid = $_REQUEST["provid"];
+                        $smartyObj -> assign("title1","Resum vendes ".$proveidor["provnom"]." any ".$any );
+                        $smartyObj -> assign("title2","");
+                        $rows = LiniaComanda::informeConsumAny($provid,$any);
+                        if ($rows==FALSE) $rows=Array();
+$prods = Array();
+foreach ($rows as $row)
+{
+   $name = $row['prodnom'];
+   if (!array_key_exists($name,$prods))
+   {
+      $prods[$name]=Array();
+      for ($i=1;$i<=12;++$i) $prods[$name][$i]=''; 
+   } 
+   $prods[$name][$row['mes']]=$row['Quantitat'];   
+}
+$rows=Array();
+foreach ($prods as $prodname => $months)
+{
+   $pn["Producte"]=$prodname;
+   for ($i=1;$i<=12;++$i)
+      $pn[""+$i]=$months[$i];
+   array_push($rows,$pn);
+}
+
+
+                        $smartyObj -> assign("multidata","true");
+                }
+
+
 		if(is_array($rows[0])) { //results returned? 
 			$columns = array_keys($rows[0]);
 			$smartyObj -> assign("rows",$rows);

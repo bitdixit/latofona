@@ -50,8 +50,8 @@
     <tr>
 		<td class="cela_nom">{$producte[1]}</td>
 		<td class="cela_preu">{$producte[2]}</td>
-		<td class="cela_preu_input"/>{$producte[3]}</td>
-		<td class="cela_preu">{$producte[3]*$producte[2]}</td>
+		<td class="cela_preu"/>{$producte[3]}</td>
+		<td class="cela_preu">{$producte[8]}</td>
 		<td>&nbsp;</td>
     </tr>
 <!--{/foreach}-->

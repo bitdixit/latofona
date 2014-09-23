@@ -11,10 +11,8 @@
 <script>
 function informeConsum(provid)
 {
-	var inici = window.prompt("Data inici? (aaaa-mm-dd)");
-	var fi = window.prompt("Data final? (aaaa-mm-dd)");
-	if (inici!=null && fi!=null)
-		location.href="informes.php?informe=consumprov&provid="+provid+"&inici="+inici+"&fi="+fi;
+	var any = window.prompt("Any?",new Date().getFullYear());
+        location.href="informes.php?informe=consumprov&provid="+provid+"&any="+any;
 }	
 </script>
 {/literal}

@@ -53,11 +53,17 @@
 		}
 		LiniaComanda::insertarProductesComanda($_REQUEST["uf"],$insertarlos,$_SESSION["datavenda"]);
 		$products = LiniaComanda::llistatProductes($_REQUEST["uf"], $data, "lc.lcquantitat > 0");
-		$subtotal = 0;
-		foreach($products as $product) {
-			$subtotal += $product[2] * $product[3]; // preu * quantitat
- 		}
-		
+ $subtotal = 0;
+
+                for ($c=0;$c<count($products);$c++)
+                {
+                     $product = $products[$c];
+                     // $product[8]=round($product[2] * $product[3], 2, PHP_ROUND_HALF_UP);
+                     $product[8]=sprintf('%0.2f',$product[2] * $product[3]);
+                     $products[$c]=$product;
+                     $subtotal += $product[8];
+                }
+		sprintf('%0.2f', $unpadded); 
 		global $masterUF;
 		
                 if(Seguretat::isPaymentPC())

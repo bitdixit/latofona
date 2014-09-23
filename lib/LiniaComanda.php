@@ -11,6 +11,23 @@ Class LiniaComanda {
 		return $res;
 	}
 
+
+        function informeConsumAny ($provid,$any)
+        {
+$strSQL="SELECT prodnom, MONTH( lcdata ) AS mes, lcprod, SUM( lcquantitat ) AS Quantitat".
+" FROM LiniaComanda, Producte".
+" WHERE lcprod = prodid".
+" AND YEAR( lcdata ) =".$any.
+" AND prodprov =".$provid.
+" GROUP BY lcprod, mes".
+" ORDER BY prodnom, mes";
+
+               global $db;
+                $res =  $db->GetAll($strSQL);
+                return $res;
+        }
+
+
 	function llistatProductes ($intIdUF,$strData, $filter="") {
 		
 		$where = "p.prodnom NOT LIKE '#%' AND pr.provnom NOT LIKE '#%'";
