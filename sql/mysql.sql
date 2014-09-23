@@ -1,28 +1,41 @@
 -- phpMyAdmin SQL Dump
--- version 3.3.7deb7
+-- version 4.0.10
 -- http://www.phpmyadmin.net
 --
--- Servidor: localhost
--- Temps de generació: 01-02-2014 a les 15:47:18
--- Versió del servidor: 5.1.66
--- Versió de PHP : 5.3.3-7+squeeze16
+-- Host: localhost
+-- Generation Time: Sep 23, 2014 at 10:11 PM
+-- Server version: 5.5.35-0ubuntu0.12.04.2
+-- PHP Version: 5.3.10-1ubuntu3.9
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
 --
--- Base de dades: `tofona`
+-- Database: `gleva`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `Data`
+-- Table structure for table `Arxius`
+--
+
+CREATE TABLE IF NOT EXISTS `Arxius` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL DEFAULT 'Untitled.txt',
+  `mime` varchar(50) NOT NULL DEFAULT 'text/plain',
+  `size` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `data` mediumblob NOT NULL,
+  `created` datetime NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `uploadedby` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=37 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Data`
 --
 
 CREATE TABLE IF NOT EXISTS `Data` (
@@ -31,12 +44,12 @@ CREATE TABLE IF NOT EXISTS `Data` (
   `datestat` tinyint(3) unsigned DEFAULT '0',
   PRIMARY KEY (`datid`),
   UNIQUE KEY `datdata` (`datdata`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=431 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=482 ;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `Ingres`
+-- Table structure for table `Ingres`
 --
 
 CREATE TABLE IF NOT EXISTS `Ingres` (
@@ -51,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `Ingres` (
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `LiniaComanda`
+-- Table structure for table `LiniaComanda`
 --
 
 CREATE TABLE IF NOT EXISTS `LiniaComanda` (
@@ -66,12 +79,12 @@ CREATE TABLE IF NOT EXISTS `LiniaComanda` (
   KEY `users` (`lcuf`),
   KEY `data` (`lcdata`),
   KEY `lcprod` (`lcprod`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=444870 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=578461 ;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `Log`
+-- Table structure for table `Log`
 --
 
 CREATE TABLE IF NOT EXISTS `Log` (
@@ -84,12 +97,12 @@ CREATE TABLE IF NOT EXISTS `Log` (
   `lgwhatobjid` int(11) NOT NULL,
   `lgwhatobjty` enum('UF','PROV','GENERAL') NOT NULL,
   PRIMARY KEY (`lgid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=213 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7712 ;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `Membre`
+-- Table structure for table `Membre`
 --
 
 CREATE TABLE IF NOT EXISTS `Membre` (
@@ -104,12 +117,12 @@ CREATE TABLE IF NOT EXISTS `Membre` (
   `memextrainfo` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`memid`),
   KEY `memuf` (`memuf`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=168 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=176 ;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `Producte`
+-- Table structure for table `Producte`
 --
 
 CREATE TABLE IF NOT EXISTS `Producte` (
@@ -126,12 +139,25 @@ CREATE TABLE IF NOT EXISTS `Producte` (
   `prodstockmax` int(11) DEFAULT '0',
   `prodstockactual` float(10,2) DEFAULT '0.00',
   PRIMARY KEY (`prodid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1370 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1815 ;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `ProducteComanda`
+-- Table structure for table `ProducteCategoria`
+--
+
+CREATE TABLE IF NOT EXISTS `ProducteCategoria` (
+  `pcid` int(11) NOT NULL AUTO_INCREMENT,
+  `pcnom` varchar(255) NOT NULL DEFAULT '',
+  `pcparentpc` int(11) DEFAULT NULL,
+  PRIMARY KEY (`pcid`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ProducteComanda`
 --
 
 CREATE TABLE IF NOT EXISTS `ProducteComanda` (
@@ -143,7 +169,7 @@ CREATE TABLE IF NOT EXISTS `ProducteComanda` (
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `ProducteHistoric`
+-- Table structure for table `ProducteHistoric`
 --
 
 CREATE TABLE IF NOT EXISTS `ProducteHistoric` (
@@ -151,12 +177,12 @@ CREATE TABLE IF NOT EXISTS `ProducteHistoric` (
   `data` date NOT NULL,
   `prodpreu` float(10,2) NOT NULL,
   UNIQUE KEY `prodid` (`prodid`,`data`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `Proveidor`
+-- Table structure for table `Proveidor`
 --
 
 CREATE TABLE IF NOT EXISTS `Proveidor` (
@@ -168,12 +194,27 @@ CREATE TABLE IF NOT EXISTS `Proveidor` (
   `provresponsable` varchar(255) DEFAULT NULL,
   `provtelefonresponsable` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`provid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=95 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=96 ;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `UnitatFamiliar`
+-- Table structure for table `StockInput`
+--
+
+CREATE TABLE IF NOT EXISTS `StockInput` (
+  `stidata` date NOT NULL DEFAULT '0000-00-00',
+  `stiprod` int(11) NOT NULL DEFAULT '0',
+  `stipreu` float(10,2) NOT NULL DEFAULT '0.00',
+  `stiquantitat` float(10,2) NOT NULL DEFAULT '0.00',
+  `stimem` int(11) NOT NULL DEFAULT '0',
+  KEY `stidata` (`stidata`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Stock input table.  Does not maintain current stock.';
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `UnitatFamiliar`
 --
 
 CREATE TABLE IF NOT EXISTS `UnitatFamiliar` (
@@ -188,7 +229,7 @@ CREATE TABLE IF NOT EXISTS `UnitatFamiliar` (
 -- --------------------------------------------------------
 
 --
--- Estructura de la taula `Venda`
+-- Table structure for table `Venda`
 --
 
 CREATE TABLE IF NOT EXISTS `Venda` (
@@ -199,4 +240,4 @@ CREATE TABLE IF NOT EXISTS `Venda` (
   `vensubtotal` float(10,2) NOT NULL DEFAULT '0.00',
   `venafegit` float(10,2) NOT NULL DEFAULT '0.00',
   PRIMARY KEY (`venid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9427 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11925 ;
